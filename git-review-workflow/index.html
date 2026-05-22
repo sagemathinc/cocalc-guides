@@ -23,7 +23,7 @@
         </div>
         <figure class="hero-figure" aria-label="Git review workflow">
           <img
-            src="./assets/hero-review.svg"
+            src="./assets/hero-review.jpg"
             alt="Illustrated workflow where fast agent commits become a careful human git review with line comments and follow-up agent turns"
           />
         </figure>
@@ -69,7 +69,7 @@
         </div>
         <figure class="panel image-panel" aria-label="Flow then review">
           <img
-            src="./assets/flow-then-review.svg"
+            src="./assets/flow-then-review.jpg"
             alt="Illustration of fast agent work flowing into a slower review desk with checks and notes"
           />
         </figure>
@@ -95,7 +95,7 @@
         </div>
         <figure class="panel image-panel" aria-label="Small commits">
           <img
-            src="./assets/commit-ladder.svg"
+            src="./assets/commit-ladder.jpg"
             alt="Illustration of a sequence of small agent commits becoming separate review steps"
           />
         </figure>
@@ -119,7 +119,7 @@
         </div>
         <figure class="panel image-panel" aria-label="Review coverage map">
           <img
-            src="./assets/review-coverage.svg"
+            src="./assets/review-coverage.jpg"
             alt="Illustration of a commit list with reviewed and unreviewed checkboxes"
           />
         </figure>
@@ -147,7 +147,7 @@
         </div>
         <figure class="panel image-panel" aria-label="Inline review comments">
           <img
-            src="./assets/inline-comments.svg"
+            src="./assets/inline-comments.jpg"
             alt="Illustration of a line-level diff comment being sent back to Codex with target diff context"
           />
         </figure>
@@ -199,7 +199,7 @@
         </div>
         <figure class="panel image-panel" aria-label="Large diff navigation">
           <img
-            src="./assets/large-diff.svg"
+            src="./assets/large-diff.jpg"
             alt="Illustration of a large diff with search, context controls, changed files, and virtualized sections"
           />
         </figure>
@@ -220,19 +220,19 @@
             own progress, and send only the draft inline comments that should
             become agent work.
           </p>
-        </div>
-        <figure class="panel code-card" aria-label="Review checklist">
-          <h3>A good review loop</h3>
-          <ul>
-            <li>Start with the oldest unreviewed commit you care about.</li>
-            <li>Read the commit message before the patch.</li>
-            <li>Search the diff for risky APIs, TODOs, and deleted guards.</li>
-            <li>Write line comments as concrete requests.</li>
+          <ul class="compact-list">
+            <li>Keep private review notes private.</li>
             <li>Send only actionable draft comments to Codex.</li>
             <li>
               Review the follow-up commit before marking the original done.
             </li>
           </ul>
+        </div>
+        <figure class="panel image-panel" aria-label="Private review state">
+          <img
+            src="./assets/private-review-state.jpg"
+            alt="Illustration of private review notes and coverage state kept separate from repository code until actionable comments are sent to the agent"
+          />
         </figure>
       </section>
 
