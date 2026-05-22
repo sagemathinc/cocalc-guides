@@ -50,6 +50,19 @@ main {
   margin: 0 auto;
 }
 
+.site-home {
+  color: var(--blue);
+  display: inline-block;
+  font:
+    800 0.9rem/1.2 ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    sans-serif;
+  margin-top: 28px;
+  text-decoration: none;
+}
+
 code {
   border: 1px solid rgb(47 111 159 / 18%);
   border-radius: 6px;
