@@ -137,6 +137,27 @@
         margin-top: 22px;
       }
 
+      .guide:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
+        grid-template-rows: 1fr;
+        min-height: 340px;
+      }
+
+      .guide:last-child:nth-child(odd) .guide-visual {
+        border-right: 1px solid rgb(30 42 49 / 8%);
+        border-bottom: 0;
+      }
+
+      .guide:last-child:nth-child(odd) .guide-visual img {
+        aspect-ratio: auto;
+        height: 100%;
+      }
+
+      .guide:last-child:nth-child(odd) .guide-copy {
+        align-self: center;
+      }
+
       a {
         color: var(--blue);
         font-weight: 700;
@@ -170,6 +191,23 @@
 
         .guide {
           min-height: 0;
+        }
+
+        .guide:last-child:nth-child(odd) {
+          grid-column: auto;
+          grid-template-columns: 1fr;
+          grid-template-rows: auto 1fr;
+          min-height: 0;
+        }
+
+        .guide:last-child:nth-child(odd) .guide-visual {
+          border-right: 0;
+          border-bottom: 1px solid rgb(30 42 49 / 8%);
+        }
+
+        .guide:last-child:nth-child(odd) .guide-visual img {
+          aspect-ratio: 16 / 9;
+          height: auto;
         }
       }
     </style>
@@ -282,6 +320,23 @@
             <p>
               Use durable, collaborative Codex threads with rich prompts,
               images, automations, search, and project-native tools.
+            </p>
+            <b class="guide-link">Read the guide</b>
+          </div>
+        </a>
+        <a class="guide" href="./git-review-workflow/">
+          <figure class="guide-visual">
+            <img
+              src="./git-review-workflow/assets/hero-review.svg"
+              alt="Illustrated workflow where agent commits are reviewed commit by commit with line comments sent back to Codex"
+            />
+          </figure>
+          <div class="guide-copy">
+            <span>Git review</span>
+            <strong>Reviewing Agent Commits in CoCalc-AI</strong>
+            <p>
+              Use the git review drawer to inspect every agent commit, mark
+              coverage, ask line-level questions, and avoid vibe coding.
             </p>
             <b class="guide-link">Read the guide</b>
           </div>

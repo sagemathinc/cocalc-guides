@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img">
+  <rect width="960" height="540" rx="34" fill="#fbf4e8"/>
+  <circle cx="132" cy="88" r="70" fill="#dcefe8"/>
+  <circle cx="808" cy="98" r="78" fill="#f4dfb5"/>
+  <rect x="86" y="72" width="788" height="386" rx="30" fill="#fff" stroke="#22343c" stroke-opacity=".12" stroke-width="3"/>
+  <rect x="118" y="118" width="210" height="284" rx="24" fill="#f8fbf9" stroke="#22343c" stroke-opacity=".1" stroke-width="3"/>
+  <text x="146" y="158" fill="#26383f" font-family="ui-sans-serif, system-ui" font-size="22" font-weight="900">agent commits</text>
+  <g font-family="ui-sans-serif, system-ui" font-size="17" font-weight="800">
+    <rect x="146" y="186" width="138" height="34" rx="17" fill="#dcefe8"/>
+    <text x="166" y="209" fill="#26383f">build fix</text>
+    <rect x="146" y="238" width="156" height="34" rx="17" fill="#f4dfb5"/>
+    <text x="166" y="261" fill="#26383f">test patch</text>
+    <rect x="146" y="290" width="128" height="34" rx="17" fill="#e7edf4"/>
+    <text x="166" y="313" fill="#26383f">docs note</text>
+  </g>
+  <path d="M344 264h122" stroke="#d49b39" stroke-width="10" stroke-linecap="round" stroke-dasharray="1 20"/>
+  <path d="M466 264l-18-14M466 264l-18 14" stroke="#d49b39" stroke-width="10" stroke-linecap="round"/>
+  <rect x="498" y="110" width="310" height="314" rx="26" fill="#ffffff" stroke="#22343c" stroke-opacity=".13" stroke-width="3"/>
+  <text x="530" y="152" fill="#26383f" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="900">git review</text>
+  <rect x="530" y="182" width="226" height="38" rx="12" fill="#213139"/>
+  <text x="552" y="207" fill="#f8fbf9" font-family="ui-monospace, monospace" font-size="15">diff --git a/file.ts</text>
+  <rect x="530" y="242" width="220" height="28" rx="8" fill="#e6ffed"/>
+  <rect x="530" y="282" width="190" height="28" rx="8" fill="#ffeef0"/>
+  <rect x="530" y="322" width="174" height="28" rx="8" fill="#eef2f6"/>
+  <circle cx="778" cy="256" r="16" fill="#2a8f82"/>
+  <path d="M770 256l6 7 12-16" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="610" y="366" width="150" height="34" rx="17" fill="#2f6f9f"/>
+  <text x="632" y="389" fill="#fff" font-family="ui-sans-serif, system-ui" font-size="16" font-weight="900">send to Codex</text>
+</svg>

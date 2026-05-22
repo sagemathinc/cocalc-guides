@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 480" role="img">
+  <rect width="720" height="480" rx="28" fill="#fbf4e8"/>
+  <path d="M206 96v288" stroke="#2f6f9f" stroke-width="10" stroke-linecap="round"/>
+  <g>
+    <circle cx="206" cy="122" r="22" fill="#2a8f82"/>
+    <circle cx="206" cy="208" r="22" fill="#d49b39"/>
+    <circle cx="206" cy="294" r="22" fill="#c66f62"/>
+    <circle cx="206" cy="380" r="22" fill="#2f6f9f"/>
+  </g>
+  <g fill="#ffffff" stroke="#26383f" stroke-opacity=".12" stroke-width="3">
+    <rect x="260" y="86" width="250" height="64" rx="18"/>
+    <rect x="260" y="172" width="300" height="64" rx="18"/>
+    <rect x="260" y="258" width="232" height="64" rx="18"/>
+    <rect x="260" y="344" width="276" height="64" rx="18"/>
+  </g>
+  <g fill="#26383f" font-family="ui-sans-serif, system-ui" font-size="18" font-weight="900">
+    <text x="286" y="126">one behavior change</text>
+    <text x="286" y="212">one test or validation</text>
+    <text x="286" y="298">one cleanup</text>
+    <text x="286" y="384">one docs update</text>
+  </g>
+</svg>

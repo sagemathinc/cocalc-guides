@@ -17,3 +17,6 @@ manuals. Each guide should be readable as a small standalone publication.
 - [Using Codex Agent Chat in CoCalc-AI](./codex-agent-chat/) - a field guide for
   durable, collaborative agent threads with rich prompts, images, automations,
   search, and project-native tools.
+- [Reviewing Agent Commits in CoCalc-AI](./git-review-workflow/) - a field guide
+  for using the git review drawer to inspect every agent commit, leave line
+  comments, and route precise follow-up work back to Codex.

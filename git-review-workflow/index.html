@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Reviewing Agent Commits in CoCalc-AI</title>
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main>
+      <a class="site-home" href="../">CoCalc Guides</a>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">A CoCalc-AI field guide for careful builders</p>
+          <h1>Reviewing Agent Commits in CoCalc-AI</h1>
+          <p class="dek">
+            Let Codex move fast in small commits, then slow the project down
+            with a real review pass: every commit visible, every line
+            commentable, and every question routed back to the agent with the
+            exact diff context.
+          </p>
+        </div>
+        <figure class="hero-figure" aria-label="Git review workflow">
+          <img
+            src="./assets/hero-review.svg"
+            alt="Illustrated workflow where fast agent commits become a careful human git review with line comments and follow-up agent turns"
+          />
+        </figure>
+      </section>
+
+      <nav class="toc" aria-label="Guide sections">
+        <a href="#why">Why this matters</a>
+        <a href="#commits">Make commits cheap</a>
+        <a href="#coverage">Review every commit</a>
+        <a href="#comments">Ask line-level questions</a>
+        <a href="#scale">Handle large diffs</a>
+        <a href="#state">Keep private review state</a>
+      </nav>
+
+      <section class="intro">
+        <p>
+          Agent work can feel like a flow state. Codex reads, edits, tests,
+          commits, and keeps going. That is useful, but it should not replace
+          human review.
+        </p>
+        <p>
+          CoCalc-AI's git review tool gives the flow a second phase. First, let
+          the agent produce understandable commits. Later, open the review
+          drawer and inspect the sequence carefully, with the same kind of
+          discipline you would bring to a pull request.
+        </p>
+      </section>
+
+      <section id="why" class="chapter">
+        <div class="chapter-number">01</div>
+        <div class="chapter-copy">
+          <h2>This is the antidote to vibe coding</h2>
+          <p>
+            The dangerous version of agent work is not that Codex writes code.
+            The dangerous version is that nobody reconstructs what changed and
+            why.
+          </p>
+          <p>
+            The review tool makes the work auditable. It turns a long chat
+            session into a finite checklist of commits, files, hunks, comments,
+            and follow-up turns.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Flow then review">
+          <img
+            src="./assets/flow-then-review.svg"
+            alt="Illustration of fast agent work flowing into a slower review desk with checks and notes"
+          />
+        </figure>
+      </section>
+
+      <section id="commits" class="chapter reverse">
+        <div class="chapter-number">02</div>
+        <div class="chapter-copy">
+          <h2>Ask for commits while the work is fresh</h2>
+          <p>
+            Small commits are the raw material for a good review. Ask Codex to
+            commit after a coherent change, with a message that explains the
+            durable reason for the change.
+          </p>
+          <blockquote>
+            Please make the fix, run the focused check, commit the change, and
+            write a commit body that explains the behavior and the validation.
+          </blockquote>
+          <p>
+            Later, each commit becomes a review unit. That is much easier to
+            audit than one enormous final diff.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Small commits">
+          <img
+            src="./assets/commit-ladder.svg"
+            alt="Illustration of a sequence of small agent commits becoming separate review steps"
+          />
+        </figure>
+      </section>
+
+      <section id="coverage" class="chapter">
+        <div class="chapter-number">03</div>
+        <div class="chapter-copy">
+          <h2>Review every commit, not just the last one</h2>
+          <p>
+            The drawer shows the repository log, commit details, changed files,
+            and the patch. Use <strong>Only unreviewed</strong> to keep your
+            place. Move newer and older through the sequence until nothing
+            important is unvisited.
+          </p>
+          <p>
+            The <strong>Reviewed</strong> checkbox is deliberately private
+            state. It is your coverage marker, not a claim that the agent or the
+            team has accepted the change.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Review coverage map">
+          <img
+            src="./assets/review-coverage.svg"
+            alt="Illustration of a commit list with reviewed and unreviewed checkboxes"
+          />
+        </figure>
+      </section>
+
+      <section id="comments" class="chapter reverse">
+        <div class="chapter-number">04</div>
+        <div class="chapter-copy">
+          <h2>Turn a line concern into an agent task</h2>
+          <p>
+            In the patch, use the inline <strong>+</strong> buttons to attach a
+            draft comment to a specific file, side, line, hunk, and snippet.
+            Write the question as if you were reviewing a pull request.
+          </p>
+          <blockquote>
+            This helper silently ignores the missing account case. Should this
+            surface an error so the caller cannot think the review was saved?
+          </blockquote>
+          <p>
+            Then send the draft inline comments to the agent. CoCalc packages
+            them with the exact <code>git show --no-color -U...</code> target,
+            so Codex receives precise review instructions instead of a vague
+            complaint.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Inline review comments">
+          <img
+            src="./assets/inline-comments.svg"
+            alt="Illustration of a line-level diff comment being sent back to Codex with target diff context"
+          />
+        </figure>
+      </section>
+
+      <section id="scale" class="strip">
+        <h2>Large diffs need navigation, not heroics</h2>
+        <div class="loop">
+          <div>
+            <span>1</span>
+            <strong>Find</strong>
+            <p>Search inside the diff and jump between matches.</p>
+          </div>
+          <div>
+            <span>2</span>
+            <strong>Scope</strong>
+            <p>Change context lines when a hunk needs more surrounding code.</p>
+          </div>
+          <div>
+            <span>3</span>
+            <strong>Jump</strong>
+            <p>
+              Use the changed-file list to move straight to the risky files.
+            </p>
+          </div>
+          <div>
+            <span>4</span>
+            <strong>Continue</strong>
+            <p>Virtualized rendering keeps big reviews usable.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="chapter-number">05</div>
+        <div class="chapter-copy">
+          <h2>Use the review drawer as the scale tool</h2>
+          <p>
+            The drawer is built for large patches: file sections are
+            virtualized, very long files reveal more lines on demand, scroll
+            position is restored, and <strong>Find in diff</strong> can expand
+            the rendered range to reach a match.
+          </p>
+          <p>
+            It also knows how to open the changed file. When something looks
+            suspicious in the patch, jump from the review to the source and ask
+            Codex to inspect the surrounding implementation.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Large diff navigation">
+          <img
+            src="./assets/large-diff.svg"
+            alt="Illustration of a large diff with search, context controls, changed files, and virtualized sections"
+          />
+        </figure>
+      </section>
+
+      <section id="state" class="chapter reverse">
+        <div class="chapter-number">06</div>
+        <div class="chapter-copy">
+          <h2>Keep your review state separate from the code</h2>
+          <p>
+            Review notes, reviewed checkboxes, inline comments, and resolved
+            status are account-scoped review state. They are saved for your
+            workflow, can be exported or imported, and are not automatically
+            sent to the agent.
+          </p>
+          <p>
+            That separation is important. You can keep private doubts, mark your
+            own progress, and send only the draft inline comments that should
+            become agent work.
+          </p>
+        </div>
+        <figure class="panel code-card" aria-label="Review checklist">
+          <h3>A good review loop</h3>
+          <ul>
+            <li>Start with the oldest unreviewed commit you care about.</li>
+            <li>Read the commit message before the patch.</li>
+            <li>Search the diff for risky APIs, TODOs, and deleted guards.</li>
+            <li>Write line comments as concrete requests.</li>
+            <li>Send only actionable draft comments to Codex.</li>
+            <li>
+              Review the follow-up commit before marking the original done.
+            </li>
+          </ul>
+        </figure>
+      </section>
+
+      <section class="closing">
+        <p>
+          The healthy rhythm is fast, then slow. Let the agent create momentum.
+          Then use git review to recover intent, ask precise questions, and make
+          sure the final project is something a careful human actually
+          understands.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
