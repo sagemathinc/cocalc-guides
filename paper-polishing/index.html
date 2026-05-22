@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>From Notebook to Paper - CoCalc-AI Guide</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">A CoCalc-AI field guide for math grad students</p>
+          <h1>From Notebook to Paper</h1>
+          <p class="dek">
+            Polish a LaTeX draft, regenerate the evidence behind a result, and
+            keep every change reviewable with Codex, Jupyter, and project
+            history working in the same place.
+          </p>
+        </div>
+        <figure class="hero-figure" aria-label="Workflow sketch">
+          <img
+            src="./assets/hero-workflow.png"
+            alt="Illustrated workflow connecting a LaTeX paper, Codex review loop, and Jupyter evidence"
+          />
+        </figure>
+      </section>
+
+      <nav class="toc" aria-label="Guide sections">
+        <a href="#setup">Set up the paper desk</a>
+        <a href="#draft">Ask for a structural read</a>
+        <a href="#evidence">Regenerate the evidence</a>
+        <a href="#patch">Apply precise edits</a>
+        <a href="#review">Review the trail</a>
+      </nav>
+
+      <section class="intro">
+        <p>
+          This guide follows Maya, a second-year math graduate student turning a
+          rough note into a paper draft. She already has the usual pieces:
+          <code>paper.tex</code>, a bibliography, a few figures, and a notebook
+          that produced one important table.
+        </p>
+        <p>
+          The point is not to let an agent write the mathematics. The point is
+          to keep the paper, computations, and review loop close enough that
+          good judgment stays cheap.
+        </p>
+      </section>
+
+      <section id="setup" class="chapter">
+        <div class="chapter-number">01</div>
+        <div class="chapter-copy">
+          <h2>Set up the paper desk</h2>
+          <p>
+            Maya opens one CoCalc project and creates a workspace rooted at
+            <code>/papers/spectral-gap</code>. That workspace becomes the
+            boundary for the files, terminals, notebooks, and Codex thread for
+            this paper.
+          </p>
+          <div class="callout">
+            <strong>Working rule:</strong> one workspace, one argument, one
+            review thread. Codex should see the same tree Maya is thinking
+            about.
+          </div>
+        </div>
+        <figure
+          class="panel image-panel workspace-panel"
+          aria-label="Workspace diagram"
+        >
+          <img
+            src="./assets/workspace.png"
+            alt="Illustration of a focused CoCalc paper workspace with files, draft, and agent thread"
+          />
+        </figure>
+      </section>
+
+      <section id="draft" class="chapter reverse">
+        <div class="chapter-number">02</div>
+        <div class="chapter-copy">
+          <h2>Ask for a structural read, not a rewrite</h2>
+          <p>
+            She opens the workspace Agent and asks Codex to read the draft like
+            a careful collaborator:
+          </p>
+          <blockquote>
+            Read <code>paper.tex</code> and tell me where the narrative breaks.
+            Do not rewrite the paper yet. Focus on missing definitions,
+            unsupported claims, theorem order, and places where notation changes
+            meaning.
+          </blockquote>
+          <p>
+            Codex can inspect the project and respond in the workspace thread.
+            Maya keeps the first pass diagnostic: it becomes the checklist for
+            the editing session.
+          </p>
+        </div>
+        <figure
+          class="panel image-panel checklist-panel"
+          aria-label="Checklist diagram"
+        >
+          <img
+            src="./assets/structural-review.png"
+            alt="Illustration of Codex turning a LaTeX draft into a structural review checklist"
+          />
+        </figure>
+      </section>
+
+      <section id="evidence" class="chapter">
+        <div class="chapter-number">03</div>
+        <div class="chapter-copy">
+          <h2>Regenerate the evidence</h2>
+          <p>
+            One theorem depends on a table from <code>experiments.ipynb</code>.
+            Maya opens the notebook beside the paper, reruns the relevant cells,
+            and asks the Agent to explain a failing cell instead of pasting an
+            error into a separate chat.
+          </p>
+          <p>
+            When the notebook produces a new table, Codex updates the LaTeX
+            around it: caption, label, paragraph reference, and the short
+            explanation after the table.
+          </p>
+        </div>
+        <figure
+          class="panel image-panel notebook-panel"
+          aria-label="Notebook to paper diagram"
+        >
+          <img
+            src="./assets/notebook-evidence.png"
+            alt="Illustration of a Jupyter notebook result flowing into a LaTeX paper figure or table"
+          />
+        </figure>
+      </section>
+
+      <section id="patch" class="chapter reverse">
+        <div class="chapter-number">04</div>
+        <div class="chapter-copy">
+          <h2>Apply precise edits</h2>
+          <p>
+            Now Maya asks for small patches, one at a time. A good prompt names
+            the file, the goal, and the constraint.
+          </p>
+          <blockquote>
+            In <code>paper.tex</code>, improve the paragraph before Theorem 3.2.
+            Keep the theorem statement unchanged. Add one sentence explaining
+            why the numerical evidence in Table 1 supports the conjecture, but
+            do not overclaim.
+          </blockquote>
+          <p>
+            This keeps Codex in the role of editor and build assistant. The math
+            remains Maya's responsibility; the patch is easy to inspect.
+          </p>
+        </div>
+        <figure
+          class="panel image-panel patch-panel"
+          aria-label="Patch diagram"
+        >
+          <img
+            src="./assets/precise-patch.png"
+            alt="Illustration of a narrow reviewable Codex patch to a LaTeX paragraph"
+          />
+        </figure>
+      </section>
+
+      <section class="strip">
+        <h2>The useful loop</h2>
+        <div class="loop">
+          <div>
+            <span>1</span>
+            <strong>Ask narrowly</strong>
+            <p>Name the file, the target section, and what must not change.</p>
+          </div>
+          <div>
+            <span>2</span>
+            <strong>Run the evidence</strong>
+            <p>Use Jupyter for the claims that depend on computation.</p>
+          </div>
+          <div>
+            <span>3</span>
+            <strong>Build the paper</strong>
+            <p>Let warnings and failed references become concrete tasks.</p>
+          </div>
+          <div>
+            <span>4</span>
+            <strong>Review the patch</strong>
+            <p>Accept only changes whose mathematical intent you can defend.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="review" class="chapter">
+        <div class="chapter-number">05</div>
+        <div class="chapter-copy">
+          <h2>Review the trail</h2>
+          <p>
+            Before sending the draft to her advisor, Maya reviews the edited
+            files and the Agent thread. Project history gives her a way to walk
+            back through the session instead of treating AI output as a pile of
+            anonymous text.
+          </p>
+          <p>
+            The final pass is deliberately boring: rebuild the PDF, check the
+            bibliography, open every figure, and read the statements aloud.
+          </p>
+        </div>
+        <figure
+          class="panel image-panel timeline-panel"
+          aria-label="Review timeline diagram"
+        >
+          <img
+            src="./assets/review-trail.png"
+            alt="Illustration of a review trail from rough draft through notebook run, patch, and final PDF"
+          />
+        </figure>
+      </section>
+
+      <section class="closing">
+        <h2>What changes about the work?</h2>
+        <p>
+          The paper is still written by a mathematician. The difference is that
+          the editing loop becomes local, inspectable, and reproducible: the
+          draft, computation, agent thread, terminal, PDF build, and project
+          history are all part of the same workspace.
+        </p>
+        <p>
+          CoCalc-AI is most useful when it shortens the distance between a
+          question and a checked change.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
