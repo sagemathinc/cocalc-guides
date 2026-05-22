@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Project Secrets for GitHub SSH - CoCalc-AI Guide</title>
+    <link rel="icon" href="../../favicon.ico" sizes="any" />
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <main>
+      <a class="site-home" href="../../">CoCalc Guides</a>
+      <article class="recipe">
+        <p class="eyebrow">Technical recipe</p>
+        <h1>Project Secrets for GitHub SSH</h1>
+        <p class="dek">
+          Use this when a CoCalc-AI project needs GitHub SSH access without
+          storing a private key in project files.
+        </p>
+
+        <section class="recipe-section">
+          <h2>Where to start</h2>
+          <p>
+            Open <strong>Settings -> Environment -> Secrets</strong>, then
+            choose <strong>Generate SSH Deploy Key</strong>.
+          </p>
+          <p>
+            CoCalc creates a fresh Ed25519 keypair for the project and shows the
+            public key. Add that public key to the GitHub repository as a deploy
+            key.
+          </p>
+        </section>
+
+        <section class="recipe-section">
+          <h2>What CoCalc sets up</h2>
+          <ul class="recipe-list">
+            <li>
+              Stores the private key as the encrypted project secret
+              <code>SSH_PRIVATE_KEY</code>.
+            </li>
+            <li>
+              Mounts project secrets read-only at
+              <code>/run/secrets/cocalc/&lt;name&gt;</code>.
+            </li>
+            <li>
+              Sets <code>COCALC_SECRETS</code> so scripts can find the mounted
+              secrets directory without hardcoding the path.
+            </li>
+            <li>Writes the public key to <code>.ssh/id_ed25519.pub</code>.</li>
+            <li>
+              Creates <code>.ssh/id_ed25519</code> as a symlink to the mounted
+              private-key secret and restarts the project so SSH can use it.
+            </li>
+          </ul>
+        </section>
+
+        <section class="recipe-section">
+          <h2>Use it with GitHub</h2>
+          <pre><code>ssh -T git@github.com
+git clone git@github.com:owner/repository.git
+cd repository
+git remote -v</code></pre>
+          <p>
+            After GitHub has the deploy key, normal SSH-based Git operations use
+            the project key automatically. Codex can then clone, fetch, and push
+            through the same terminal workflow you can inspect.
+          </p>
+          <p>
+            This is separate from <code>gh</code> authentication. If you also
+            want Codex to create issues, open pull requests, or edit releases
+            with <code>gh</code>, authenticate <code>gh</code> with a suitably
+            scoped GitHub account or token.
+          </p>
+        </section>
+
+        <section class="recipe-section">
+          <h2>Security model</h2>
+          <p>
+            Project secrets are encrypted at rest and hidden from the file
+            explorer, downloads, backups, rootfs images, and public sharing.
+            They are meant for credentials, not for ordinary configuration.
+          </p>
+          <p>
+            The important caveat is runtime access: any code or collaborator
+            with access to the running project can read mounted secret files.
+            Use a deploy key or token with the narrowest permissions that fit
+            the job.
+          </p>
+        </section>
+
+        <p class="recipe-back">
+          <a href="../">Back to Using GitHub from CoCalc-AI</a>
+        </p>
+      </article>
+    </main>
+  </body>
+</html>

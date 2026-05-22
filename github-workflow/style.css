@@ -242,6 +242,44 @@ blockquote {
   padding: 18px 22px;
 }
 
+.product-hook {
+  border: 1px solid rgb(47 111 159 / 18%);
+  border-radius: 18px;
+  background: rgb(47 111 159 / 7%);
+  margin: 22px 0 0;
+  padding: 18px 20px;
+}
+
+.product-hook span {
+  color: var(--gold);
+  display: block;
+  font:
+    800 0.78rem/1.2 ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    sans-serif;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.product-hook p {
+  margin-bottom: 10px;
+}
+
+.product-hook a,
+.recipe-back a {
+  color: var(--blue);
+  font:
+    800 0.95rem/1.2 ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    sans-serif;
+  text-decoration: none;
+}
+
 blockquote {
   color: #26383f;
   font-size: 1.04rem;
@@ -253,6 +291,45 @@ blockquote {
   border-radius: 22px;
   box-shadow: var(--shadow);
   overflow: hidden;
+}
+
+.recipe {
+  width: min(820px, 100%);
+  margin: 110px auto 90px;
+}
+
+.recipe h1 {
+  font-size: clamp(3.4rem, 7vw, 5.8rem);
+}
+
+.recipe-section {
+  border-top: 1px solid rgb(30 42 47 / 12%);
+  margin-top: 54px;
+  padding-top: 42px;
+}
+
+.recipe-section h2 {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+}
+
+.recipe-section p,
+.recipe-list {
+  color: #314047;
+  font-size: clamp(1.16rem, 1.8vw, 1.36rem);
+}
+
+.recipe-list {
+  padding-left: 1.25rem;
+}
+
+.recipe-list li + li {
+  margin-top: 0.85rem;
+}
+
+.recipe-back {
+  border-top: 1px solid rgb(30 42 47 / 12%);
+  margin-top: 54px;
+  padding-top: 24px;
 }
 
 .code-card {
