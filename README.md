@@ -9,3 +9,5 @@ manuals. Each guide should be readable as a small standalone publication.
 
 - [From Notebook to Paper](./paper-polishing/) - a field guide for polishing a
   LaTeX paper with Codex, Jupyter, and project history.
+- [Installing Software in CoCalc-AI](./software-install/) - a field guide for
+  installing tools and packages with the terminal, Codex, and snapshots.
