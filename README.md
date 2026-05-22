@@ -14,3 +14,6 @@ manuals. Each guide should be readable as a small standalone publication.
 - [Creating and Managing Your Own RootFS](./rootfs-management/) - a field guide
   for publishing reusable project environments with versions, scans, and
   visibility.
+- [Using Codex Agent Chat in CoCalc-AI](./codex-agent-chat/) - a field guide for
+  durable, collaborative agent threads with rich prompts, images, automations,
+  search, and project-native tools.

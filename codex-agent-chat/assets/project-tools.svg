@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 480" role="img">
+  <rect width="720" height="480" rx="28" fill="#fffaf1"/>
+  <rect x="250" y="160" width="220" height="116" rx="28" fill="#24363e"/>
+  <text x="302" y="227" fill="#f8fbf9" font-family="ui-sans-serif, system-ui" font-size="30" font-weight="900">Codex</text>
+  <g fill="#ffffff" stroke="#26383f" stroke-opacity=".12" stroke-width="3">
+    <rect x="70" y="62" width="170" height="92" rx="22"/>
+    <rect x="484" y="62" width="170" height="92" rx="22"/>
+    <rect x="70" y="326" width="170" height="92" rx="22"/>
+    <rect x="484" y="326" width="170" height="92" rx="22"/>
+  </g>
+  <text x="110" y="116" fill="#26383f" font-family="ui-sans-serif, system-ui" font-size="22" font-weight="900">Notebook</text>
+  <text x="536" y="116" fill="#26383f" font-family="ui-sans-serif, system-ui" font-size="22" font-weight="900">Terminal</text>
+  <text x="126" y="380" fill="#26383f" font-family="ui-sans-serif, system-ui" font-size="22" font-weight="900">Files</text>
+  <text x="526" y="380" fill="#26383f" font-family="ui-sans-serif, system-ui" font-size="22" font-weight="900">Browser</text>
+  <g stroke="#2a8f82" stroke-width="8" stroke-linecap="round" fill="none">
+    <path d="M240 122l58 54"/>
+    <path d="M484 122l-58 54"/>
+    <path d="M240 368l58-94"/>
+    <path d="M484 368l-58-94"/>
+  </g>
+  <rect x="260" y="306" width="200" height="44" rx="22" fill="#f4dfb5"/>
+  <text x="304" y="334" fill="#26383f" font-family="ui-sans-serif, system-ui" font-size="17" font-weight="900">cocalc project ...</text>
+</svg>

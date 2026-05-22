@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 480" role="img">
+  <rect width="720" height="480" rx="28" fill="#fbf4e8"/>
+  <rect x="66" y="62" width="250" height="350" rx="28" fill="#ffffff" stroke="#26383f" stroke-opacity=".12" stroke-width="3"/>
+  <text x="98" y="110" fill="#26383f" font-family="ui-sans-serif, system-ui" font-size="22" font-weight="900">Visible window</text>
+  <g fill="#dcefe8">
+    <rect x="98" y="146" width="160" height="22" rx="11"/>
+    <rect x="98" y="188" width="190" height="22" rx="11"/>
+    <rect x="98" y="230" width="120" height="22" rx="11"/>
+    <rect x="98" y="272" width="174" height="22" rx="11"/>
+  </g>
+  <rect x="396" y="74" width="210" height="156" rx="24" fill="#213139"/>
+  <text x="431" y="122" fill="#f8fbf9" font-family="ui-sans-serif, system-ui" font-size="21" font-weight="900">SQLite archive</text>
+  <path d="M438 160h126M438 190h94" stroke="#f4dfb5" stroke-width="10" stroke-linecap="round"/>
+  <rect x="372" y="284" width="260" height="78" rx="24" fill="#ffffff" stroke="#26383f" stroke-opacity=".12" stroke-width="3"/>
+  <circle cx="416" cy="323" r="18" fill="none" stroke="#2f6f9f" stroke-width="8"/>
+  <path d="M430 337l28 28" stroke="#2f6f9f" stroke-width="8" stroke-linecap="round"/>
+  <text x="472" y="331" fill="#26383f" font-family="ui-sans-serif, system-ui" font-size="21" font-weight="900">search all history</text>
+  <path d="M316 240c42 8 58 8 96-4" fill="none" stroke="#d49b39" stroke-width="8" stroke-linecap="round" stroke-dasharray="1 18"/>
+  <path d="M412 236l-18-12M412 236l-14 18" stroke="#d49b39" stroke-width="8" stroke-linecap="round"/>
+</svg>

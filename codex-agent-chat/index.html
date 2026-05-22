@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Using Codex Agent Chat in CoCalc-AI</title>
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main>
+      <a class="site-home" href="../">CoCalc Guides</a>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">A CoCalc-AI field guide for project teams</p>
+          <h1>Using Codex Agent Chat in CoCalc-AI</h1>
+          <p class="dek">
+            CoCalc's Codex chat is built for durable, collaborative project
+            work: long threads, rich prompts, images, scheduled runs, search,
+            and direct access to the same files, notebooks, and terminals your
+            team is using.
+          </p>
+        </div>
+        <figure class="hero-figure" aria-label="Codex chat workspace">
+          <img
+            src="./assets/hero-chat.svg"
+            alt="Illustrated CoCalc-AI chat workspace with Codex, collaborators, files, notebooks, terminal sessions, images, and durable logs"
+          />
+        </figure>
+      </section>
+
+      <nav class="toc" aria-label="Guide sections">
+        <a href="#durable">Durable by default</a>
+        <a href="#prompt">Write rich prompts</a>
+        <a href="#collaborate">Work together</a>
+        <a href="#scale">Use long threads</a>
+        <a href="#automation">Automate checks</a>
+        <a href="#tools">Give Codex project tools</a>
+        <a href="#boundary">Know the boundary</a>
+      </nav>
+
+      <section class="intro">
+        <p>
+          Codex chat in CoCalc-AI is not trying to be every AI app. It is a
+          project-native agent room. Its strength is that the conversation lives
+          beside the work, survives ordinary interruptions, and can be shared by
+          collaborators who are looking at the same project.
+        </p>
+        <p>
+          Use it when the task depends on project state: a codebase, a notebook,
+          a paper draft, a terminal session, an image, a long computation, or a
+          team conversation that should still make sense next week.
+        </p>
+      </section>
+
+      <section id="durable" class="chapter">
+        <div class="chapter-number">01</div>
+        <div class="chapter-copy">
+          <h2>Durable by default</h2>
+          <p>
+            A Codex turn should not depend on one browser tab staying alive.
+            Refresh the browser, close a laptop, reconnect later, or recover
+            from a project-host restart: the chat rows, turn state, and activity
+            trail are project data rather than disposable UI memory.
+          </p>
+          <p>
+            That changes how you work. You can ask for a careful refactor, a
+            long build investigation, or a paper review without babysitting the
+            page just to keep the turn alive.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Durable turns">
+          <img
+            src="./assets/durable-turns.svg"
+            alt="Illustration of a browser refresh and project-host restart reconnecting to the same durable Codex turn"
+          />
+        </figure>
+      </section>
+
+      <section id="prompt" class="chapter reverse">
+        <div class="chapter-number">02</div>
+        <div class="chapter-copy">
+          <h2>Write the prompt you actually mean</h2>
+          <p>
+            The chat composer is a real editor. Use Markdown, code blocks,
+            quotes, lists, links, and pasted images. For visual work,
+            screenshots can be part of the prompt. For implementation work,
+            include the failing command, the exact file path, and the output you
+            care about.
+          </p>
+          <blockquote>
+            This screenshot shows the toolbar wrapping incorrectly. Please
+            inspect the frontend chat styles, fix the smallest cause, and run
+            the focused frontend check.
+          </blockquote>
+          <p>
+            Generated images also belong in the thread. When image generation is
+            part of the work, outputs can appear in the chat instead of being
+            hidden behind a separate tool window.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Rich prompt editor">
+          <img
+            src="./assets/rich-prompts.svg"
+            alt="Illustration of a rich chat prompt containing Markdown, code, a quote, an image, and a Codex request"
+          />
+        </figure>
+      </section>
+
+      <section id="collaborate" class="chapter">
+        <div class="chapter-number">03</div>
+        <div class="chapter-copy">
+          <h2>Work in the same room</h2>
+          <p>
+            CoCalc-AI chat is multi-user by design. A collaborator can read the
+            same thread, watch the same terminal, inspect the same notebook, and
+            understand why Codex changed a file. The thread is part of the
+            project record, not a private aside.
+          </p>
+          <p>
+            Authentication can also match the collaboration model. A turn can
+            use a user's ChatGPT plan or account API key, a project API key, a
+            site key, or a shared project setup. That keeps ownership explicit
+            instead of forcing every collaborator through one personal browser
+            session.
+          </p>
+          <div class="product-hook">
+            <span>Concrete hook</span>
+            <p>
+              Use <strong>Settings -> Environment -> Secrets</strong> for
+              project credentials such as deploy keys. Secrets are the right
+              place for shared project access; chat messages and project files
+              are not.
+            </p>
+          </div>
+        </div>
+        <figure class="panel image-panel" aria-label="Collaborative chat">
+          <img
+            src="./assets/collaborative-chat.svg"
+            alt="Illustration of several collaborators reading one Codex thread with separate payment and credential sources"
+          />
+        </figure>
+      </section>
+
+      <section id="scale" class="chapter reverse">
+        <div class="chapter-number">04</div>
+        <div class="chapter-copy">
+          <h2>Let long threads stay long</h2>
+          <p>
+            Some agent threads should be short. Others become lab notebooks:
+            weeks of build failures, paper edits, search trails, screenshots,
+            and decisions.
+          </p>
+          <p>
+            CoCalc's chat UI is built for that shape. It renders long threads
+            with a virtualized message list, offloads old messages to a backend
+            SQLite store, and keeps full text search useful across current and
+            archived history.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Long thread search">
+          <img
+            src="./assets/long-threads.svg"
+            alt="Illustration of a very long Codex thread flowing through a fast viewport, SQLite archive, and search box"
+          />
+        </figure>
+      </section>
+
+      <section id="automation" class="strip">
+        <h2>Use scheduled Codex when the job has a rhythm</h2>
+        <div class="loop">
+          <div>
+            <span>1</span>
+            <strong>Check</strong>
+            <p>Run a daily command, test, notebook, or log inspection.</p>
+          </div>
+          <div>
+            <span>2</span>
+            <strong>Summarize</strong>
+            <p>Ask Codex to report what changed and what still needs review.</p>
+          </div>
+          <div>
+            <span>3</span>
+            <strong>Pause</strong>
+            <p>Stop noisy automation after unacknowledged failures.</p>
+          </div>
+          <div>
+            <span>4</span>
+            <strong>Resume</strong>
+            <p>Keep the automation attached to the same chat context.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="tools" class="chapter">
+        <div class="chapter-number">05</div>
+        <div class="chapter-copy">
+          <h2>Give Codex project-native tools</h2>
+          <p>
+            CoCalc passes Codex project-scoped guidance for the CoCalc CLI and a
+            built-in skill. That means Codex can work with live documents,
+            notebooks, terminal sessions, and browser-visible project state
+            through defined commands instead of guessing from stale files.
+          </p>
+          <pre><code>cocalc project terminal history &lt;id&gt;
+cocalc project jupyter exec --path analysis.ipynb --stdin
+cocalc project file ...
+</code></pre>
+          <p>
+            The practical effect is simple: when a notebook, terminal, or synced
+            text document is the source of truth, Codex can be told to use that
+            source of truth.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="CoCalc CLI tools">
+          <img
+            src="./assets/project-tools.svg"
+            alt="Illustration of Codex using the CoCalc CLI to reach a notebook, terminal, synced text document, and browser state"
+          />
+        </figure>
+      </section>
+
+      <section id="boundary" class="chapter reverse">
+        <div class="chapter-number">06</div>
+        <div class="chapter-copy">
+          <h2>Know what this integration is for</h2>
+          <p>
+            CoCalc's Codex chat is strongest when durability, collaboration,
+            project files, notebooks, terminals, images, and scheduled work
+            matter. It is deliberately not a clone of every standalone Codex app
+            interface.
+          </p>
+          <p>
+            Use the standalone app when its app-specific workflow is the point.
+            Use CoCalc when the agent needs to live with the project.
+          </p>
+        </div>
+        <figure class="panel code-card" aria-label="Best uses">
+          <h3>It does a few things extremely well</h3>
+          <ul>
+            <li>Durable turns that survive ordinary interruptions.</li>
+            <li>Collaborative threads with project-owned context.</li>
+            <li>Rich prompts with images, Markdown, code, and quotes.</li>
+            <li>Long searchable histories that stay fast.</li>
+            <li>Scheduled agent work attached to the same project.</li>
+          </ul>
+        </figure>
+      </section>
+
+      <section class="closing">
+        <p>
+          Treat a Codex chatroom like a shared project notebook. It can hold the
+          question, the evidence, the attempted fixes, the generated images, the
+          terminal trail, the collaborator discussion, and the next scheduled
+          check. That is the part CoCalc-AI makes unusual.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
