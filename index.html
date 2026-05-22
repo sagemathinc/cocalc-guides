@@ -40,9 +40,9 @@
       }
 
       main {
-        width: min(960px, calc(100% - 40px));
+        width: min(1120px, calc(100% - 40px));
         margin: 0 auto;
-        padding: 84px 0;
+        padding: 76px 0 92px;
       }
 
       .eyebrow {
@@ -71,8 +71,8 @@
 
       .guides {
         display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 22px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 26px;
         margin-top: 64px;
       }
 
@@ -82,10 +82,30 @@
         background: rgb(255 255 255 / 72%);
         box-shadow: 0 22px 60px rgb(37 53 58 / 12%);
         color: inherit;
-        display: block;
-        min-height: 260px;
-        padding: 28px;
+        display: grid;
+        grid-template-rows: auto 1fr;
+        min-height: 430px;
+        overflow: hidden;
         text-decoration: none;
+      }
+
+      .guide-visual {
+        background: rgb(245 241 232 / 72%);
+        border-bottom: 1px solid rgb(30 42 49 / 8%);
+        display: block;
+        margin: 0;
+      }
+
+      .guide-visual img {
+        aspect-ratio: 16 / 9;
+        display: block;
+        height: auto;
+        object-fit: cover;
+        width: 100%;
+      }
+
+      .guide-copy {
+        padding: 28px;
       }
 
       .guide span {
@@ -93,12 +113,12 @@
         display: block;
         font-size: 0.82rem;
         font-weight: 800;
-        margin-bottom: 24px;
+        margin-bottom: 16px;
       }
 
       .guide strong {
         display: block;
-        font-size: clamp(1.8rem, 3vw, 2.5rem);
+        font-size: clamp(2rem, 3vw, 2.7rem);
         line-height: 1;
         margin-bottom: 18px;
       }
@@ -106,6 +126,14 @@
       .guide p {
         color: var(--muted);
         margin: 0;
+      }
+
+      .guide-link {
+        color: var(--blue);
+        display: inline-block;
+        font-size: 0.92rem;
+        font-weight: 800;
+        margin-top: 22px;
       }
 
       a {
@@ -128,14 +156,19 @@
       }
 
       @media (max-width: 760px) {
+        main {
+          width: min(100% - 28px, 720px);
+          padding-top: 48px;
+        }
+
         .guides {
           grid-template-columns: 1fr;
+          gap: 20px;
+          margin-top: 44px;
         }
-      }
 
-      @media (min-width: 761px) and (max-width: 1040px) {
-        .guides {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
+        .guide {
+          min-height: 0;
         }
       }
     </style>
@@ -151,36 +184,72 @@
       </p>
       <div class="guides">
         <a class="guide" href="./paper-polishing/">
-          <span>Math writing</span>
-          <strong>From Notebook to Paper</strong>
-          <p>
-            Polish a LaTeX draft with Codex, Jupyter, collaborators, and project
-            history in one workspace.
-          </p>
+          <figure class="guide-visual">
+            <img
+              src="./paper-polishing/assets/hero-workflow.png"
+              alt="Illustrated workflow for polishing a paper with LaTeX, Jupyter, and Codex"
+            />
+          </figure>
+          <div class="guide-copy">
+            <span>Math writing</span>
+            <strong>From Notebook to Paper</strong>
+            <p>
+              Polish a LaTeX draft with Codex, Jupyter, collaborators, and
+              project history in one workspace.
+            </p>
+            <b class="guide-link">Read the guide</b>
+          </div>
         </a>
         <a class="guide" href="./software-install/">
-          <span>Project setup</span>
-          <strong>Installing Software in CoCalc-AI</strong>
-          <p>
-            Use the terminal, Codex, apt, language packages, snapshots, and
-            shared terminal history to make a project environment work.
-          </p>
+          <figure class="guide-visual">
+            <img
+              src="./software-install/assets/hero-install.png"
+              alt="Illustrated workflow for installing software in a CoCalc-AI project"
+            />
+          </figure>
+          <div class="guide-copy">
+            <span>Project setup</span>
+            <strong>Installing Software in CoCalc-AI</strong>
+            <p>
+              Use the terminal, Codex, apt, language packages, snapshots, and
+              shared terminal history to make a project environment work.
+            </p>
+            <b class="guide-link">Read the guide</b>
+          </div>
         </a>
         <a class="guide" href="./github-workflow/">
-          <span>GitHub workflow</span>
-          <strong>Using GitHub from CoCalc-AI</strong>
-          <p>
-            Install <code>gh</code>, authenticate, and let Codex help with
-            issues, pull requests, releases, and reviews.
-          </p>
+          <figure class="guide-visual">
+            <img
+              src="./github-workflow/assets/hero-github.png"
+              alt="Illustrated workflow for using GitHub and pull requests from CoCalc-AI"
+            />
+          </figure>
+          <div class="guide-copy">
+            <span>GitHub workflow</span>
+            <strong>Using GitHub from CoCalc-AI</strong>
+            <p>
+              Install <code>gh</code>, authenticate, and let Codex help with
+              issues, pull requests, releases, and reviews.
+            </p>
+            <b class="guide-link">Read the guide</b>
+          </div>
         </a>
         <a class="guide" href="./research-computation/">
-          <span>Research runs</span>
-          <strong>Research Runs That Survive</strong>
-          <p>
-            Let Codex manage logs, retries, partial outputs, summaries, and
-            recovery for messy computations.
-          </p>
+          <figure class="guide-visual">
+            <img
+              src="./research-computation/assets/hero-computation.png"
+              alt="Illustrated workflow for managing long-running research computations"
+            />
+          </figure>
+          <div class="guide-copy">
+            <span>Research runs</span>
+            <strong>Research Runs That Survive</strong>
+            <p>
+              Let Codex manage logs, retries, partial outputs, summaries, and
+              recovery for messy computations.
+            </p>
+            <b class="guide-link">Read the guide</b>
+          </div>
         </a>
       </div>
     </main>
