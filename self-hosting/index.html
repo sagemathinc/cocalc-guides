@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Self-Hosting CoCalc-AI</title>
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main>
+      <a class="site-home" href="../">CoCalc Guides</a>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">A CoCalc-AI field guide for independent teams</p>
+          <h1>Self-Hosting CoCalc-AI</h1>
+          <p class="dek">
+            CoCalc Launchpad is the small-team way to run your own CoCalc-AI
+            site: one tiny self-contained binary, an embedded database, your
+            admin account, your compute, your security policy, and the same
+            project experience as the public CoCalc cloud.
+          </p>
+        </div>
+        <figure class="hero-figure" aria-label="Launchpad self-hosting map">
+          <img
+            src="./assets/hero-launchpad.jpg"
+            alt="Illustrated Launchpad self-hosted CoCalc-AI site connected to projects, collaborators, clouds, and user-controlled data"
+          />
+        </figure>
+      </section>
+
+      <nav class="toc" aria-label="Guide sections">
+        <a href="#why">Why self-host?</a>
+        <a href="#install">Install Launchpad</a>
+        <a href="#compute">Bring compute</a>
+        <a href="#security">Inherit hardening</a>
+        <a href="#control">Set your rules</a>
+        <a href="#rocket">Step up to Rocket</a>
+        <a href="#source">Read and change the code</a>
+      </nav>
+
+      <section class="intro">
+        <p>
+          Self-hosting CoCalc-AI is not meant to be a stripped-down demo. The
+          point is to run the same kind of collaborative notebook, terminal,
+          file, chat, agent, course, app-server, snapshot, backup, and project
+          host system yourself.
+        </p>
+        <p>
+          Launchpad is the entry point: simple enough for a lab, classroom,
+          startup, or small research group. Rocket is the enterprise-grade step
+          up when the same functionality needs to support many more active users
+          and a larger operations footprint.
+        </p>
+      </section>
+
+      <section id="why" class="chapter">
+        <div class="chapter-number">01</div>
+        <div class="chapter-copy">
+          <h2>Run CoCalc where your work belongs</h2>
+          <p>
+            The public CoCalc cloud is convenient. Self-hosting is for groups
+            that need stronger control: data residency, institutional rules,
+            custom membership tiers, predictable cloud spend, private
+            collaborators, or a specialized environment for one research
+            program.
+          </p>
+          <p>
+            Launchpad gives you the CoCalc-AI product without making you become
+            a cloud platform vendor. You run the control plane. You decide where
+            projects run. Your users still get CoCalc's notebooks, terminals,
+            chat, Codex integration, collaborative files, snapshots, backups,
+            courses, and managed app workflows.
+          </p>
+        </div>
+        <figure class="panel code-card" aria-label="Who should self-host">
+          <h3>Good fits</h3>
+          <ul>
+            <li>A research group with private data and custom software.</li>
+            <li>A class or workshop that needs controlled compute.</li>
+            <li>A startup that wants agent sandboxes without cloud markup.</li>
+            <li>An institution that wants local policy and audit control.</li>
+            <li>A software project that wants a ready-to-use hosted lab.</li>
+          </ul>
+        </figure>
+      </section>
+
+      <section id="install" class="chapter reverse">
+        <div class="chapter-number">02</div>
+        <div class="chapter-copy">
+          <h2>Install one small Launchpad binary</h2>
+          <p>
+            Launchpad is packaged as a Node single-executable application. The
+            compressed binary is small enough to treat like an ordinary tool,
+            not a cluster distribution. The current alpha install path is a
+            single shell command from the
+            <a
+              href="https://software.cocalc.ai/software/cocalc-launchpad/index.html"
+              >public Launchpad page</a
+            >.
+          </p>
+          <pre><code>curl -fsSL https://software.cocalc.ai/software/cocalc-launchpad/install.sh | bash
+cocalc-launchpad</code></pre>
+          <p>
+            On first start, Launchpad can use PGlite as an embedded database.
+            That means the simplest installation is one Node.js process: no
+            separate Postgres service just to make a small site real.
+          </p>
+          <p>
+            You visit the registration link, create the first admin account, and
+            then configure the site from inside CoCalc.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Launchpad install flow">
+          <img
+            src="./assets/install-flow.jpg"
+            alt="Illustration of installing a Launchpad SEA binary, starting one process with PGlite, and creating an admin account"
+          />
+        </figure>
+      </section>
+
+      <section id="compute" class="chapter">
+        <div class="chapter-number">03</div>
+        <div class="chapter-copy">
+          <h2>Use your own VMs, clouds, and guardrails</h2>
+          <p>
+            A self-hosted CoCalc site separates control from compute. Launchpad
+            runs the site and coordinates project hosts. Projects can run on
+            your own VMs, or on public cloud providers that CoCalc knows how to
+            provision and bootstrap.
+          </p>
+          <p>
+            The cloud provider layer already targets Google Cloud, Nebius,
+            Hyperstack, Lambda, local development hosts, and self-hosted hosts.
+            Cloudflare integration can provide ingress, custom-domain, and SSH
+            routing pieces where you choose to configure it.
+          </p>
+          <p>
+            The important bit is policy. You can use public cloud resources with
+            collaborators while applying your own limits for disk, memory,
+            backups, egress, GPU access, and cost exposure.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Compute provider map">
+          <img
+            src="./assets/compute-providers.jpg"
+            alt="Illustration of Launchpad routing project hosts to owned VMs and cloud providers with guardrails and backups"
+          />
+        </figure>
+      </section>
+
+      <section id="security" class="chapter reverse">
+        <div class="chapter-number">04</div>
+        <div class="chapter-copy">
+          <h2>Get the security work too</h2>
+          <p>
+            Launchpad users get CoCalc-AI's security hardening as part of the
+            product, not as a separate exercise. That matters because a hosted
+            collaborative agent environment is security-sensitive: users run
+            code, share projects, store secrets, expose apps, create SSH access,
+            and ask agents to operate on live work.
+          </p>
+          <p>
+            CoCalc-AI has been built with account 2FA, passkeys as second
+            factors, fresh-auth gates for dangerous actions, project secrets,
+            registration controls, admin policy surfaces, and guarded project
+            compute in mind.
+          </p>
+          <p>
+            Self-hosting should not mean every group invents its own brittle
+            auth and sandbox policy. Launchpad brings those defaults with it,
+            while still letting the site owner decide how strict the local site
+            should be.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Launchpad security stack">
+          <img
+            src="./assets/security-stack.jpg"
+            alt="Illustration of a self-hosted CoCalc-AI site protected by 2FA, passkeys, fresh auth, project secrets, admin controls, and guarded compute"
+          />
+        </figure>
+      </section>
+
+      <section id="control" class="chapter">
+        <div class="chapter-number">05</div>
+        <div class="chapter-copy">
+          <h2>Define your own site economy</h2>
+          <p>
+            Public hosted sandboxes often hide the real economics: storage,
+            network egress, snapshots, backups, idle compute, GPUs, and human
+            permissions all turn into a fixed product policy.
+          </p>
+          <p>
+            With Launchpad, you can define the product policy yourself. Create
+            your own membership tiers. Choose the default project resources.
+            Decide who can start expensive hosts. Set limits that match your
+            budget instead of someone else's margin.
+          </p>
+          <p>
+            During the current alpha phase, Launchpad is easy to try. Long term,
+            the intended shape is that Launchpad licensing is included with
+            CoCalc memberships rather than priced like a separate enterprise
+            platform.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Data and cost control">
+          <img
+            src="./assets/data-control.jpg"
+            alt="Illustration of a self-hosted CoCalc-AI site with local rules for data, backups, membership tiers, quotas, egress, and cost"
+          />
+        </figure>
+      </section>
+
+      <section id="rocket" class="strip">
+        <h2>Launchpad first, Rocket when the site grows</h2>
+        <div class="loop">
+          <div>
+            <span>1</span>
+            <strong>Launchpad</strong>
+            <p>
+              One-bay self-hosted CoCalc for small teams, labs, classes, and
+              private groups.
+            </p>
+          </div>
+          <div>
+            <span>2</span>
+            <strong>Same Product</strong>
+            <p>
+              Notebooks, files, terminals, chat, Codex, courses, apps, hosts,
+              snapshots, and backups stay the same.
+            </p>
+          </div>
+          <div>
+            <span>3</span>
+            <strong>Rocket</strong>
+            <p>
+              Enterprise-grade scale-up for many more active users, bays,
+              project hosts, and operations controls.
+            </p>
+          </div>
+          <div>
+            <span>4</span>
+            <strong>No Rewrite</strong>
+            <p>
+              Launchpad exercises the same architecture family, so growth is a
+              deployment step rather than a product migration.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="source" class="chapter">
+        <div class="chapter-number">06</div>
+        <div class="chapter-copy">
+          <h2>Keep the code within reach</h2>
+          <p>
+            CoCalc-AI's code is available at
+            <a href="https://github.com/sagemathinc/cocalc-ai">GitHub</a>. That
+            changes the support story. Codex can inspect the actual source,
+            explain why a feature behaves the way it does, trace a bug, or help
+            build a custom version for a site with unusual needs.
+          </p>
+          <p>
+            For a self-hosted deployment, that matters. You are not boxed into a
+            black-box hosted agent product. You can ask questions all the way
+            down to the source and decide whether to configure, patch, or extend
+            the system.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Source customization">
+          <img
+            src="./assets/source-customization.jpg"
+            alt="Illustration of Codex reading the cocalc-ai source repository, running tests, and producing a custom Launchpad build"
+          />
+        </figure>
+      </section>
+
+      <section class="closing">
+        <p>
+          Launchpad is the small, practical door into self-hosted CoCalc-AI.
+          Rocket is the larger door when the same product needs serious scale.
+          The story is the same in both cases: collaborative computing with
+          agents, but under your control.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

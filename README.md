@@ -29,3 +29,6 @@ manuals. Each guide should be readable as a small standalone publication.
 - [CoCalc Jupyter Notebooks](./jupyter-notebooks/) - a field guide for durable,
   collaborative notebooks with TimeTravel, Codex live-state access, widgets,
   nbgrader, and whiteboard graph execution.
+- [Self-Hosting CoCalc-AI](./self-hosting/) - a field guide for running
+  Launchpad, controlling your compute and security policy, and stepping up to
+  Rocket for enterprise-grade scale.
