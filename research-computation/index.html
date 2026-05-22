@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Long-Running Research Computations in CoCalc-AI</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">A CoCalc-AI field guide for researchers</p>
+          <h1>Research Runs That Survive</h1>
+          <p class="dek">
+            Turn a long-running computation into a managed research loop:
+            checkpoint often, log everything, let Codex recover from failures,
+            and keep the useful output.
+          </p>
+        </div>
+        <figure class="hero-figure" aria-label="Research computation map">
+          <img
+            src="./assets/hero-computation.png"
+            alt="Illustrated workflow connecting a terminal computation, Codex assistant, checkpoints, notebook plots, and collaborator cursors"
+          />
+        </figure>
+      </section>
+
+      <nav class="toc" aria-label="Guide sections">
+        <a href="#shape">Shape the job</a>
+        <a href="#run">Run it in a terminal</a>
+        <a href="#recover">Expect crashes</a>
+        <a href="#monitor">Monitor together</a>
+        <a href="#salvage">Salvage the signal</a>
+        <a href="#archive">Leave a trail</a>
+      </nav>
+
+      <section class="intro">
+        <p>
+          Research computations are often messy. A parameter range is too large.
+          One case hangs. A server restarts. A script crashes after producing
+          half the data you actually needed.
+        </p>
+        <p>
+          The goal is not to make every run perfect. The goal is to design the
+          run so partial output is useful, failures are visible, and Codex can
+          manage the tedious details: restart, inspect logs, skip bad cases, and
+          summarize what was learned.
+        </p>
+        <p>
+          CoCalc-AI is a good place for this because the terminal, notebooks,
+          files, logs, chat, and agent thread are all part of one realtime
+          collaborative project.
+        </p>
+      </section>
+
+      <section id="shape" class="chapter">
+        <div class="chapter-number">01</div>
+        <div class="chapter-copy">
+          <h2>Shape the job so partial results count</h2>
+          <p>
+            A fragile computation writes one giant file at the end. A resilient
+            computation writes small results as it goes.
+          </p>
+          <p>
+            Ask Codex to turn a script into a chunked run: each input case gets
+            its own output file, its own log entry, and a way to detect whether
+            it already finished.
+          </p>
+          <blockquote>
+            Refactor this sweep so each parameter pair writes one JSON result.
+            It should skip completed cases, log failures, and be safe to rerun.
+          </blockquote>
+        </div>
+        <figure
+          class="panel image-panel"
+          aria-label="Chunked output and checkpoints"
+        >
+          <img
+            src="./assets/chunked-output.png"
+            alt="Illustration of a computation split into small independent tiles that write checkpointed output files"
+          />
+        </figure>
+      </section>
+
+      <section id="run" class="chapter reverse">
+        <div class="chapter-number">02</div>
+        <div class="chapter-copy">
+          <h2>Run it where history survives</h2>
+          <p>
+            Use a terminal for the real run. It gives Codex and collaborators a
+            concrete history to inspect: commands, output, working directory,
+            and the current process state.
+          </p>
+          <pre><code>mkdir -p runs/2026-05-22
+python sweep.py \
+  --start 0 \
+  --stop 10000 \
+  --out runs/2026-05-22 \
+  2>&1 | tee runs/2026-05-22/run.log</code></pre>
+          <p>
+            The exact command matters less than the habit: every run should have
+            a named output directory and a log that can be read later.
+          </p>
+        </div>
+        <figure class="panel code-card" aria-label="Run checklist">
+          <h3>Before pressing enter</h3>
+          <ul>
+            <li>Where will output files go?</li>
+            <li>Where will the log go?</li>
+            <li>Can completed cases be skipped?</li>
+            <li>What is the smallest verification run?</li>
+          </ul>
+        </figure>
+      </section>
+
+      <section id="recover" class="chapter">
+        <div class="chapter-number">03</div>
+        <div class="chapter-copy">
+          <h2>Expect crashes, then route around them</h2>
+          <p>
+            A crash is useful information if it is captured. Codex can read the
+            log, identify the failing input, patch the script, and rerun only
+            the missing or failed cases.
+          </p>
+          <pre><code>python summarize_run.py runs/2026-05-22
+python sweep.py --resume --out runs/2026-05-22</code></pre>
+          <p>
+            For long jobs, the right question is often not “why did this fail?”
+            It is “what finished, what failed, and what should we try next?”
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Crash recovery loop">
+          <img
+            src="./assets/crash-recovery.png"
+            alt="Illustration of Codex reading terminal logs, retrying failed computation tiles, and routing around crashes"
+          />
+        </figure>
+      </section>
+
+      <section id="monitor" class="chapter reverse">
+        <div class="chapter-number">04</div>
+        <div class="chapter-copy">
+          <h2>Monitor together without babysitting</h2>
+          <p>
+            CoCalc-AI’s collaborative terminal changes the social shape of a
+            long run. A collaborator can check the live process, inspect the
+            same log, or ask Codex for a status summary without asking you to
+            paste screenshots.
+          </p>
+          <blockquote>
+            Read the current terminal history and output directory. Summarize
+            progress, failures, estimated remaining cases, and anything that
+            needs a human decision.
+          </blockquote>
+          <p>
+            This is especially useful after server restarts or disconnects. The
+            project remains the shared source of truth.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Shared monitoring">
+          <img
+            src="./assets/shared-monitoring.png"
+            alt="Illustration of shared terminal history, logs, resource graphs, collaborator cursors, and a Codex status summary"
+          />
+        </figure>
+      </section>
+
+      <section id="salvage" class="strip">
+        <h2>Ask Codex to salvage the signal</h2>
+        <div class="loop">
+          <div>
+            <span>1</span>
+            <strong>Inventory</strong>
+            <p>List completed, missing, failed, and suspicious cases.</p>
+          </div>
+          <div>
+            <span>2</span>
+            <strong>Summarize</strong>
+            <p>Make a table of useful output and the failures that remain.</p>
+          </div>
+          <div>
+            <span>3</span>
+            <strong>Plot</strong>
+            <p>Generate quick figures from the data that actually exists.</p>
+          </div>
+          <div>
+            <span>4</span>
+            <strong>Rerun</strong>
+            <p>Retry only the narrow slice that could change the conclusion.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="archive" class="chapter">
+        <div class="chapter-number">05</div>
+        <div class="chapter-copy">
+          <h2>Leave a trail for future you</h2>
+          <p>
+            A long run should end with a short written receipt. What command was
+            run? Which commit or script version produced the data? Which cases
+            failed? Which plots or tables are ready to trust?
+          </p>
+          <p>
+            CoCalc-AI snapshots and backups give you another safety net. Before
+            risky environment changes or major reruns, take a snapshot so the
+            project can return to a known state.
+          </p>
+          <div class="callout">
+            <strong>Good final prompt:</strong> write a concise
+            <code>RUN-2026-05-22.md</code> with commands, output paths,
+            failures, plots, and next steps.
+          </div>
+        </div>
+        <figure class="panel image-panel" aria-label="Salvage summary">
+          <img
+            src="./assets/salvage-summary.png"
+            alt="Illustration of partial output files being gathered into a notebook report with plots, tables, and highlighted failures"
+          />
+        </figure>
+      </section>
+
+      <section class="closing">
+        <h2>The win is useful evidence</h2>
+        <p>
+          Long-running research computation is rarely tidy. CoCalc-AI helps by
+          keeping the process inspectable: terminal history, logs, notebooks,
+          snapshots, files, chat, and Codex all live in the same collaborative
+          project.
+        </p>
+        <p>
+          That means Codex can do more than write code. It can help manage the
+          messy middle: restart the run, preserve partial data, summarize the
+          evidence, and leave you with something another researcher can inspect.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
