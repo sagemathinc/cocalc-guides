@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CoCalc Jupyter Notebooks</title>
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main>
+      <a class="site-home" href="../">CoCalc Guides</a>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">
+            A CoCalc-AI field guide for computational notebooks
+          </p>
+          <h1>CoCalc Jupyter Notebooks</h1>
+          <p class="dek">
+            CoCalc keeps the familiar Jupyter notebook shape, then adds durable
+            execution, realtime collaboration, TimeTravel, Codex access to live
+            notebook state, scalable rendering, widgets, whiteboards, and course
+            workflows.
+          </p>
+        </div>
+        <figure class="hero-figure" aria-label="CoCalc Jupyter workspace">
+          <img
+            src="./assets/hero-jupyter.jpg"
+            alt="Illustrated CoCalc Jupyter notebook workspace with collaborators, Codex, TimeTravel, widgets, and backend run state"
+          />
+        </figure>
+      </section>
+
+      <nav class="toc" aria-label="Guide sections">
+        <a href="#durable">Durable execution</a>
+        <a href="#collaboration">Realtime collaboration</a>
+        <a href="#timetravel">TimeTravel</a>
+        <a href="#agent">Codex and live state</a>
+        <a href="#scale">Large notebooks</a>
+        <a href="#ecosystem">Jupyter ecosystem</a>
+        <a href="#whiteboard">Whiteboard graphs</a>
+      </nav>
+
+      <section class="intro">
+        <p>
+          A notebook is usually the most important document in a computational
+          project. It contains the experiment, the explanation, the plots, the
+          false starts, and the result someone needs to trust.
+        </p>
+        <p>
+          CoCalc-AI treats that notebook as shared project infrastructure, not
+          just a browser widget. The browser is a view into backend notebook
+          state. That one design choice changes how safe it feels to run code,
+          collaborate, ask Codex for help, and come back to work later.
+        </p>
+      </section>
+
+      <section id="durable" class="chapter">
+        <div class="chapter-number">01</div>
+        <div class="chapter-copy">
+          <h2>Run a cell, then leave</h2>
+          <p>
+            In a conventional JupyterLab session, browser state matters more
+            than it should. In CoCalc, the notebook run is owned by the backend.
+            Start a cell, close the tab, refresh the browser, or reconnect from
+            another machine: output continues to be captured.
+          </p>
+          <p>
+            That is especially valuable for real research notebooks, where a
+            cell may fetch data, fit a model, render a plot, or run for longer
+            than your attention span.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Durable execution">
+          <img
+            src="./assets/durable-execution.jpg"
+            alt="Illustration of a Jupyter cell that keeps running on the backend after the browser tab closes"
+          />
+        </figure>
+      </section>
+
+      <section id="collaboration" class="chapter reverse">
+        <div class="chapter-number">02</div>
+        <div class="chapter-copy">
+          <h2>Work in the same notebook at the same time</h2>
+          <p>
+            CoCalc notebooks are realtime collaborative documents. Multiple
+            users can edit cells, watch execution, discuss output, and see
+            changes without passing files around.
+          </p>
+          <p>
+            Markdown cells are not second-class text blobs. You can edit them
+            with a WYSIWYG experience between code cells, which makes notebooks
+            feel more like readable documents and less like alternating boxes of
+            raw syntax.
+          </p>
+        </div>
+        <figure
+          class="panel image-panel"
+          aria-label="Collaborative notebook editing"
+        >
+          <img
+            src="./assets/collaboration-markdown.jpg"
+            alt="Illustration of collaborators editing code and WYSIWYG markdown cells in one shared notebook"
+          />
+        </figure>
+      </section>
+
+      <section id="timetravel" class="chapter">
+        <div class="chapter-number">03</div>
+        <div class="chapter-copy">
+          <h2>Use TimeTravel instead of memory</h2>
+          <p>
+            CoCalc records notebook history at high resolution as you type, with
+            authorship attached to changes. TimeTravel is lightweight enough to
+            be ordinary, but useful enough to recover the moment before a bad
+            edit, compare what changed, or explain how a result evolved.
+          </p>
+          <p>
+            Notebook TimeTravel stores the document history long term without
+            trimming away old revisions. For outputs, the history focuses on the
+            final output state instead of bloating the record with every
+            transient streaming step.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Notebook TimeTravel">
+          <img
+            src="./assets/timetravel.jpg"
+            alt="Illustration of a TimeTravel timeline for notebook edits with attributed revisions and final output"
+          />
+        </figure>
+      </section>
+
+      <section id="agent" class="chapter reverse">
+        <div class="chapter-number">04</div>
+        <div class="chapter-copy">
+          <h2>Let Codex use the live notebook</h2>
+          <p>
+            A notebook on disk is not always the notebook you are using. CoCalc
+            gives Codex a project-scoped notebook API through
+            <code>cocalc project jupyter</code>, so the agent can inspect cells,
+            insert or move cells, run selected code, and read output from the
+            live notebook state.
+          </p>
+          <pre><code>cocalc project jupyter cells --path analysis.ipynb
+cocalc project jupyter run --path analysis.ipynb --cell-index 3
+cocalc project jupyter exec --path analysis.ipynb --stdin</code></pre>
+          <p>
+            That makes notebook help much more concrete. Codex can fix a
+            traceback, add a verification cell, rerun just the relevant code,
+            and report what changed without pretending that raw
+            <code>.ipynb</code> JSON is the source of truth.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Codex notebook API">
+          <img
+            src="./assets/live-agent.jpg"
+            alt="Illustration of Codex using cocalc project jupyter to operate on live notebook cells and output"
+          />
+        </figure>
+      </section>
+
+      <section id="scale" class="chapter">
+        <div class="chapter-number">05</div>
+        <div class="chapter-copy">
+          <h2>Open notebooks that would normally feel heavy</h2>
+          <p>
+            Large notebooks are common: lecture notes, exploratory research,
+            simulation logs, homework solutions, and data science reports.
+            CoCalc renders notebook content efficiently by focusing work on what
+            is visible as you scroll.
+          </p>
+          <p>
+            The result is practical rather than flashy: big notebooks stay
+            navigable, long outputs are controlled, and the interface remains
+            close enough to standard Jupyter conventions that users do not have
+            to relearn the document.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Large notebook rendering">
+          <img
+            src="./assets/large-notebooks.jpg"
+            alt="Illustration of a large Jupyter notebook where visible cells render while offscreen cells wait"
+          />
+        </figure>
+      </section>
+
+      <section id="ecosystem" class="strip">
+        <h2>Keep the Jupyter ecosystem, add CoCalc infrastructure</h2>
+        <div class="loop">
+          <div>
+            <span>1</span>
+            <strong>Widgets</strong>
+            <p>
+              ipywidgets and standard visualization libraries belong in the
+              notebook, with collaborative state carried through CoCalc.
+            </p>
+          </div>
+          <div>
+            <span>2</span>
+            <strong>Courses</strong>
+            <p>
+              nbgrader support connects notebooks to assignment and grading
+              workflows.
+            </p>
+          </div>
+          <div>
+            <span>3</span>
+            <strong>Kernels</strong>
+            <p>
+              Use the kernels and packages installed in the project environment.
+            </p>
+          </div>
+          <div>
+            <span>4</span>
+            <strong>Publishing</strong>
+            <p>
+              The same notebook can be a working document, a course artifact, or
+              a public viewer target.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="whiteboard" class="chapter">
+        <div class="chapter-number">06</div>
+        <div class="chapter-copy">
+          <h2>Use a whiteboard when linear cells are not enough</h2>
+          <p>
+            Some computational ideas are graphs, not lists. CoCalc's whiteboard
+            can hold Jupyter cells as nodes in a directed graph, then run them
+            in order. That is a natural fit for workflows, dependency diagrams,
+            computational pipelines, and teaching examples where the structure
+            matters as much as the code.
+          </p>
+          <p>
+            It is still CoCalc: collaborators can work on the same board, Codex
+            can reason about the project around it, and outputs remain part of a
+            shared workspace instead of a private local session.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Whiteboard graph cells">
+          <img
+            src="./assets/whiteboard-graph.jpg"
+            alt="Illustration of Jupyter cells arranged as nodes in a directed CoCalc whiteboard graph"
+          />
+        </figure>
+      </section>
+
+      <section class="closing">
+        <p>
+          CoCalc's notebook goal is not to replace the Jupyter mental model. It
+          is to make that model safer for serious work: durable when the browser
+          disappears, collaborative when people work together, historical when
+          changes matter, and accessible to agents through the same live state
+          users actually see.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
