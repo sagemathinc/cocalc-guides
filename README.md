@@ -11,3 +11,6 @@ manuals. Each guide should be readable as a small standalone publication.
   LaTeX paper with Codex, Jupyter, and project history.
 - [Installing Software in CoCalc-AI](./software-install/) - a field guide for
   installing tools and packages with the terminal, Codex, and snapshots.
+- [Creating and Managing Your Own RootFS](./rootfs-management/) - a field guide
+  for publishing reusable project environments with versions, scans, and
+  visibility.

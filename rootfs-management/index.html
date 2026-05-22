@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Creating and Managing Your Own RootFS</title>
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main>
+      <a class="site-home" href="../">CoCalc Guides</a>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">
+            A CoCalc-AI field guide for environment builders
+          </p>
+          <h1>Creating and Managing Your Own RootFS</h1>
+          <p class="dek">
+            Turn a working project environment into a reusable RootFS image: one
+            exact software stack for a course, a research group, a site, or a
+            public library demo.
+          </p>
+        </div>
+        <figure class="hero-figure" aria-label="RootFS publishing map">
+          <img
+            src="./assets/hero-rootfs.svg"
+            alt="Illustrated workflow from one prepared project to a shared RootFS catalog image used by many projects"
+          />
+        </figure>
+      </section>
+
+      <nav class="toc" aria-label="Guide sections">
+        <a href="#why">Why make one?</a>
+        <a href="#build">Build in a project</a>
+        <a href="#scan">Scan and clean</a>
+        <a href="#publish">Publish a version</a>
+        <a href="#use">Use and upgrade</a>
+        <a href="#technical">How it is stored</a>
+      </nav>
+
+      <section class="intro">
+        <p>
+          A RootFS is the visible Linux root filesystem for a CoCalc-AI project:
+          the system packages, command-line tools, libraries, and data that live
+          under <code>/</code>.
+        </p>
+        <p>
+          You can customize one project, publish that environment, and then
+          reuse it. Instructors can give every student the same stack. A
+          researcher can keep new projects consistent. Site admins can provide
+          official environments. Library authors can publish a ready-to-run
+          world for their software.
+        </p>
+        <p>
+          The point is not just convenience. It is reproducibility with a social
+          shape: a named environment, a version trail, scan status, visibility,
+          and a way to upgrade without erasing the past.
+        </p>
+      </section>
+
+      <section id="why" class="chapter">
+        <div class="chapter-number">01</div>
+        <div class="chapter-copy">
+          <h2>Use a RootFS when the environment is part of the work</h2>
+          <p>
+            Some projects need more than files. A numerical course needs a
+            specific Python stack and datasets. A workshop needs command-line
+            tools already installed. A site wants a blessed environment for a
+            class of users.
+          </p>
+          <p>
+            A managed RootFS lets that environment become a reusable artifact
+            instead of a setup paragraph that everyone runs slightly
+            differently.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="RootFS audiences">
+          <img
+            src="./assets/rootfs-audiences.svg"
+            alt="Illustration showing instructors, researchers, site admins, and software authors reusing one RootFS environment"
+          />
+        </figure>
+      </section>
+
+      <section id="build" class="chapter reverse">
+        <div class="chapter-number">02</div>
+        <div class="chapter-copy">
+          <h2>Build it in an ordinary project</h2>
+          <p>
+            Start with a normal CoCalc-AI project. Install system packages,
+            language packages, datasets, fonts, command-line tools, and whatever
+            your users should have on day one.
+          </p>
+          <pre><code>sudo apt-get update
+sudo apt-get install -y graphviz ffmpeg
+python -m pip install networkx pandas
+python - <<'PY'
+import networkx, pandas
+print("environment ready")
+PY</code></pre>
+          <p>
+            Let Codex do the tedious part: read failures, install narrowly,
+            verify directly, and leave a short setup note describing what the
+            environment is meant to support.
+          </p>
+        </div>
+        <figure
+          class="panel image-panel"
+          aria-label="Build project environment"
+        >
+          <img
+            src="./assets/build-environment.svg"
+            alt="Illustration of a terminal, package manager, data files, and Codex preparing a project environment"
+          />
+        </figure>
+      </section>
+
+      <section id="scan" class="chapter">
+        <div class="chapter-number">03</div>
+        <div class="chapter-copy">
+          <h2>Clean and scan before publishing</h2>
+          <p>
+            Before publishing, remove temporary files, private tokens, old build
+            output, and anything that should not become part of the shared
+            environment. A RootFS is meant to carry software and data, not
+            secrets.
+          </p>
+          <p>
+            In <strong>Settings -> Environment -> Runtime Image</strong>, use
+            <strong>Scan current RootFS</strong> as a preflight check. Published
+            images can also carry catalog scan status, so users can see whether
+            the exact release has known findings.
+          </p>
+          <blockquote>
+            Please inspect this project before I publish its RootFS. Look for
+            obvious secrets, temporary files, stale caches, and missing
+            verification commands.
+          </blockquote>
+        </div>
+        <figure class="panel image-panel" aria-label="Clean and scan RootFS">
+          <img
+            src="./assets/scan-clean.svg"
+            alt="Illustration of a RootFS being cleaned, scanned, and checked before publication"
+          />
+        </figure>
+      </section>
+
+      <section id="publish" class="chapter reverse">
+        <div class="chapter-number">04</div>
+        <div class="chapter-copy">
+          <h2>Publish a version, not a vibe</h2>
+          <p>
+            Publish from
+            <strong>Settings -> Environment -> Runtime Image</strong> with
+            <strong>Publish current RootFS</strong>. Give it a clear label,
+            version, channel, tags, and description.
+          </p>
+          <p>
+            Choose the visibility deliberately: private for your own templates,
+            collaborators for shared projects, public for environments you
+            intend other site users to discover. Site admins can promote images
+            to official and manage their lifecycle.
+          </p>
+        </div>
+        <figure class="panel code-card" aria-label="Publish checklist">
+          <h3>Publishing checklist</h3>
+          <ul>
+            <li>Name what the image is for.</li>
+            <li>Use a human version such as <code>2026-spring</code>.</li>
+            <li>Record the verification command.</li>
+            <li>Choose private, collaborators, or public.</li>
+            <li>Keep the older version available for rollback.</li>
+          </ul>
+        </figure>
+      </section>
+
+      <section id="use" class="strip">
+        <h2>Manage RootFS images like small releases</h2>
+        <div class="loop">
+          <div>
+            <span>1</span>
+            <strong>Select</strong>
+            <p>
+              Choose a catalog image when creating or configuring a project.
+            </p>
+          </div>
+          <div>
+            <span>2</span>
+            <strong>Start</strong>
+            <p>
+              CoCalc makes the managed RootFS available on the project host.
+            </p>
+          </div>
+          <div>
+            <span>3</span>
+            <strong>Upgrade</strong>
+            <p>
+              Publish a newer version and move projects when they are ready.
+            </p>
+          </div>
+          <div>
+            <span>4</span>
+            <strong>Rollback</strong>
+            <p>Keep the previous RootFS state as the safe return point.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="chapter-number">05</div>
+        <div class="chapter-copy">
+          <h2>Use the CLI when the lifecycle becomes operational</h2>
+          <p>
+            The UI is the right place to learn the workflow. The CLI is useful
+            when an instructor, admin, or release maintainer wants repeatable
+            operations.
+          </p>
+          <pre><code>cocalc rootfs list
+cocalc rootfs publish \
+  --project "Math 480 template" \
+  --label "Math 480 Python stack" \
+  --image-version 2026-spring \
+  --visibility collaborators \
+  --wait
+cocalc rootfs scan-audit</code></pre>
+          <p>
+            Admins also have commands for official images, scan reports,
+            blocking, hiding, deletion, and garbage collection.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="RootFS version lifecycle">
+          <img
+            src="./assets/version-lifecycle.svg"
+            alt="Illustration of RootFS versions moving from draft to published to upgraded and rolled back"
+          />
+        </figure>
+      </section>
+
+      <section id="technical" class="chapter reverse">
+        <div class="chapter-number">06</div>
+        <div class="chapter-copy">
+          <h2>This is not just Docker with a prettier label</h2>
+          <p>
+            CoCalc can still use advanced OCI or Docker image strings, but the
+            managed RootFS catalog is the native path. Publishing captures the
+            visible project RootFS as an immutable CoCalc-managed release.
+          </p>
+          <p>
+            Managed releases are stored in CoCalc’s bucket-backed artifact
+            system as compressed, deduplicated rustic snapshots. Project hosts
+            restore them into a local cache and mount them as shared lower
+            directories. That is why a base RootFS image does not count against
+            ordinary project disk quota; only the project’s writable data does.
+          </p>
+          <div class="callout">
+            <strong>Practical effect:</strong> users get a fast, reusable
+            environment without pushing an image to an external registry or
+            making every project store another full copy.
+          </div>
+        </div>
+        <figure class="panel image-panel" aria-label="RootFS storage model">
+          <img
+            src="./assets/storage-model.svg"
+            alt="Illustration of a compressed deduplicated bucket artifact restoring into shared host cache and many project overlays"
+          />
+        </figure>
+      </section>
+
+      <section class="closing">
+        <h2>The environment becomes a thing you can share</h2>
+        <p>
+          A good RootFS image is not a frozen machine. It is a named, versioned,
+          scanned starting point. Students, collaborators, and future projects
+          can begin from the same foundation, then still make their own
+          project-specific changes.
+        </p>
+        <p>
+          That is the useful middle ground: less fragile than setup
+          instructions, lighter than asking everyone to build a container
+          pipeline, and integrated with the same collaborative CoCalc project
+          where the work happens.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
