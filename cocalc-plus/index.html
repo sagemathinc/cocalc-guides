@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CoCalc Plus</title>
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main>
+      <a class="site-home" href="../">CoCalc Guides</a>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">
+            A CoCalc-AI field guide for one-person workspaces
+          </p>
+          <h1>CoCalc Plus</h1>
+          <p class="dek">
+            CoCalc Plus is the smallest way to run CoCalc yourself: a free,
+            self-contained app for one user, one project, your own files, and a
+            familiar browser workspace on a laptop, workstation, or SSH
+            reachable machine.
+          </p>
+        </div>
+        <figure class="hero-figure" aria-label="CoCalc Plus local project">
+          <img
+            src="./assets/hero-plus.jpg"
+            alt="Illustrated CoCalc Plus workspace on a laptop with one user, one project, local files, terminal, notebook, and Codex chat"
+          />
+        </figure>
+      </section>
+
+      <nav class="toc" aria-label="Guide sections">
+        <a href="#fit">What Plus is for</a>
+        <a href="#install">Install it</a>
+        <a href="#remote">Use an SSH machine</a>
+        <a href="#sync">Sync folders</a>
+        <a href="#workspace">Use the full workspace</a>
+        <a href="#limits">Know the boundary</a>
+        <a href="#paths">Choose the right product</a>
+      </nav>
+
+      <section class="intro">
+        <p>
+          Plus is not a miniature team site and it is not a managed cloud
+          service. It is CoCalc as a personal tool: start it on a machine you
+          control, open the local web server, and work with the files and
+          software already available there.
+        </p>
+        <p>
+          That makes it a good companion to JupyterLab, VS Code tunnels, SSH,
+          and ordinary terminals. It keeps the setup small while giving you
+          CoCalc's notebooks, terminals, TimeTravel, LaTeX, whiteboards, slides,
+          and Codex chat in one durable browser workspace.
+        </p>
+      </section>
+
+      <section id="fit" class="chapter">
+        <div class="chapter-number">01</div>
+        <div class="chapter-copy">
+          <h2>The one-person CoCalc</h2>
+          <p>
+            CoCalc Plus is designed for one admin user. There is one project.
+            There is almost no site configuration. The data lives on the
+            computer where Plus is running, and the app serves a local browser
+            UI instead of asking you to create a hosted account first.
+          </p>
+          <p>
+            The effect is simple: install a tool, start it, and get a complete
+            CoCalc workspace around your local files. Open another browser tab
+            if you want a second view; realtime collaboration still matters,
+            even when the collaborator is your own second window.
+          </p>
+        </div>
+        <figure class="panel code-card" aria-label="Good uses for CoCalc Plus">
+          <h3>Good fits</h3>
+          <ul>
+            <li>
+              A laptop where you want notebooks, terminals, and Codex chat.
+            </li>
+            <li>A remote GPU box that only needs SSH access.</li>
+            <li>A shared workstation you personally administer.</li>
+            <li>A cloud image that should offer CoCalc beside JupyterLab.</li>
+            <li>A private data folder you do not want to upload elsewhere.</li>
+          </ul>
+        </figure>
+      </section>
+
+      <section id="install" class="chapter reverse">
+        <div class="chapter-number">02</div>
+        <div class="chapter-copy">
+          <h2>Install one small app</h2>
+          <p>
+            Plus is packaged as a Node single-executable application with a
+            small curated tools bundle. The current alpha installer is a single
+            shell command from the
+            <a href="https://software.cocalc.ai/software/cocalc-plus/index.html"
+              >public Plus page</a
+            >.
+          </p>
+          <pre><code>curl -fsSL https://software.cocalc.ai/software/cocalc-plus/install.sh | bash
+cocalc-plus</code></pre>
+          <p>
+            On Linux it installs under
+            <code>~/.local/share/cocalc-plus</code> and creates a launcher in
+            <code>~/.local/bin</code>. On macOS it uses
+            <code>~/Library/Application Support/cocalc-plus</code>. The runtime
+            uses an embedded SQLite database via Node, so the normal local case
+            is one lightweight server process.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="CoCalc Plus install flow">
+          <img
+            src="./assets/install-flow.jpg"
+            alt="Illustration of installing CoCalc Plus with curl, a single executable, a tools bundle, embedded SQLite, and localhost"
+          />
+        </figure>
+      </section>
+
+      <section id="remote" class="chapter">
+        <div class="chapter-number">03</div>
+        <div class="chapter-copy">
+          <h2>Turn an SSH machine into a CoCalc tab</h2>
+          <p>
+            The unusual Plus feature is remote launch. If you can SSH to a
+            machine, Plus can install itself there, start a remote Plus daemon
+            bound to <code>127.0.0.1</code>, create an auth token, forward the
+            port back to your laptop, and open the result in a browser tab.
+          </p>
+          <pre><code>cocalc-plus ssh user@remote-machine</code></pre>
+          <p>
+            This is useful for research servers, GPU workstations, rented cloud
+            machines, or any machine where you already trust SSH. You get the
+            convenience of a web workspace without setting up a public web
+            service on the remote host.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="SSH remote workflow">
+          <img
+            src="./assets/ssh-remote.jpg"
+            alt="Illustration of CoCalc Plus installing on an SSH machine, starting a localhost daemon, forwarding the port, and opening a local browser tab"
+          />
+        </figure>
+      </section>
+
+      <section id="sync" class="chapter reverse">
+        <div class="chapter-number">04</div>
+        <div class="chapter-copy">
+          <h2>Keep a local and remote folder together</h2>
+          <p>
+            Plus also includes a file-sync workflow. Choose a local folder and a
+            remote folder, and Plus can run a bidirectional sync session between
+            them. Under the hood this is powered by the bundled
+            <code>reflect-sync</code> tool and managed from the Plus UI.
+          </p>
+          <p>
+            That gives you a practical pattern for remote work: keep source
+            files or notebooks in a folder you can inspect locally, run heavy
+            code on the remote machine, and let the sync machinery keep both
+            sides moving together.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Bidirectional file sync">
+          <img
+            src="./assets/file-sync.jpg"
+            alt="Illustration of bidirectional file sync between a local folder and a remote folder using reflect-sync"
+          />
+        </figure>
+      </section>
+
+      <section id="workspace" class="chapter">
+        <div class="chapter-number">05</div>
+        <div class="chapter-copy">
+          <h2>Use the same CoCalc workspace</h2>
+          <p>
+            Plus is intentionally small, but the workspace is still CoCalc. You
+            can use terminals, Jupyter notebooks whose execution state is not
+            tied to the browser tab, Codex chat with durable turns and rich
+            markdown input, LaTeX, slides, whiteboards, TimeTravel history, and
+            the usual project file tools.
+          </p>
+          <p>
+            The point is not to replace every specialized tool. The point is to
+            put the common pieces of computational work in one interface: files,
+            command lines, notebooks, writing, diagrams, agent chat, and
+            history.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Full CoCalc workspace">
+          <img
+            src="./assets/workspace.jpg"
+            alt="Illustration of CoCalc Plus workspace features including terminal, Jupyter, Codex chat, LaTeX, whiteboard, and TimeTravel"
+          />
+        </figure>
+      </section>
+
+      <section id="limits" class="strip">
+        <h2>Be clear about the trust model</h2>
+        <div class="loop">
+          <div>
+            <span>1</span>
+            <strong>Your Machine</strong>
+            <p>
+              Plus works with the computer where you run it, or a remote
+              computer you can reach by SSH.
+            </p>
+          </div>
+          <div>
+            <span>2</span>
+            <strong>Single User</strong>
+            <p>
+              It is for one admin user, not a public multiuser service or class
+              site.
+            </p>
+          </div>
+          <div>
+            <span>3</span>
+            <strong>Direct Access</strong>
+            <p>
+              Files and commands run with the authority you already have on that
+              machine.
+            </p>
+          </div>
+          <div>
+            <span>4</span>
+            <strong>Agent Sandbox</strong>
+            <p>
+              Codex sandboxing is available for agent work, but Plus itself is
+              about convenience and control rather than project isolation.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="paths" class="chapter">
+        <div class="chapter-number">06</div>
+        <div class="chapter-copy">
+          <h2>Know when to step up</h2>
+          <p>
+            Plus is free and intended to remain free. It is also a showcase for
+            what CoCalc feels like when installed next to the files and machines
+            you already use. The long-term vision is for cloud compute providers
+            to offer Plus beside JupyterLab as a simple browser workspace for a
+            single rented machine.
+          </p>
+          <p>
+            When you need real multiuser collaboration, managed project hosts,
+            snapshots, backups, RootFS images, quota policy, stronger
+            sandboxing, registration, courses, or site administration, move up
+            to hosted CoCalc or self-host with Launchpad. When a Launchpad
+            deployment needs enterprise-grade scale, Rocket is the larger
+            version of the same product family.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="CoCalc product paths">
+          <img
+            src="./assets/product-paths.jpg"
+            alt="Illustration comparing CoCalc Plus, hosted CoCalc, Launchpad, and Rocket"
+          />
+        </figure>
+      </section>
+
+      <section class="closing">
+        <p>
+          CoCalc Plus is the personal door into CoCalc-AI: no site operations,
+          no cloud account, no team policy, just a local or SSH-backed CoCalc
+          workspace. Launchpad, Rocket, and hosted CoCalc are the step up when
+          the same interface needs managed infrastructure around it.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

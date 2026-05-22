@@ -32,3 +32,5 @@ manuals. Each guide should be readable as a small standalone publication.
 - [Self-Hosting CoCalc-AI](./self-hosting/) - a field guide for running
   Launchpad, controlling your compute and security policy, and stepping up to
   Rocket for enterprise-grade scale.
+- [CoCalc Plus](./cocalc-plus/) - a field guide for installing the free,
+  self-contained one-user CoCalc app locally or on an SSH reachable machine.
