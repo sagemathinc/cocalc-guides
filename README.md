@@ -34,3 +34,6 @@ manuals. Each guide should be readable as a small standalone publication.
   Rocket for enterprise-grade scale.
 - [CoCalc Plus](./cocalc-plus/) - a field guide for installing the free,
   self-contained one-user CoCalc app locally or on an SSH reachable machine.
+- [CoCalc for Jupyter Users](./cocalc-for-jupyter/) - a comparison guide for
+  understanding CoCalc alongside JupyterLab, Colab, Deepnote, SageMaker, VS
+  Code, marimo, Hex, Kaggle, and other notebook-centered tools.

@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CoCalc for Jupyter Users</title>
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main>
+      <a class="site-home" href="../">CoCalc Guides</a>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">A CoCalc-AI field guide for notebook people</p>
+          <h1>CoCalc for Jupyter Users</h1>
+          <p class="dek">
+            If you already know JupyterLab, Colab, Deepnote, SageMaker, VS Code,
+            marimo, Hex, or Kaggle, the fastest way to understand CoCalc is to
+            ask a different question: what happens when the notebook becomes
+            part of a durable collaborative project?
+          </p>
+        </div>
+        <figure class="hero-figure" aria-label="Notebook landscape map">
+          <img
+            src="./assets/hero-landscape.jpg"
+            alt="Illustrated map of CoCalc for Jupyter users with nearby notebook tools including JupyterLab, VS Code, Google Colab, Deepnote, SageMaker, marimo, Hex, and Kaggle"
+          />
+        </figure>
+      </section>
+
+      <nav class="toc" aria-label="Guide sections">
+        <a href="#tone">Not a scoreboard</a>
+        <a href="#map">The landscape</a>
+        <a href="#centers">Centers of gravity</a>
+        <a href="#project">Notebook to project</a>
+        <a href="#differences">CoCalc differences</a>
+        <a href="#choose">Choose by workflow</a>
+        <a href="#sources">References</a>
+      </nav>
+
+      <section id="tone" class="intro">
+        <p>
+          Notebook tools are good because they make different bets. JupyterLab
+          is an extensible notebook environment. Colab and Kaggle make hosted
+          notebooks easy to start. Deepnote and Hex focus on collaborative data
+          work. SageMaker Studio and Databricks connect notebooks to large cloud
+          data and ML platforms. marimo rethinks notebooks as reactive Python.
+          VS Code brings notebooks into an editor-first workflow.
+        </p>
+        <p>
+          CoCalc's bet is that the durable project is the right home for serious
+          computational work. A notebook is still a notebook, but it lives next
+          to terminals, files, LaTeX, whiteboards, TimeTravel, course tools,
+          snapshots, backups, and Codex chat.
+        </p>
+      </section>
+
+      <section id="map" class="chapter">
+        <div class="chapter-number">01</div>
+        <div class="chapter-copy">
+          <h2>Compare the center, not the checklist</h2>
+          <p>
+            Feature matrices get stale quickly, and they are often less helpful
+            than they look. The better question is: what is the product
+            organized around?
+          </p>
+          <p>
+            A notebook-first tool optimizes the notebook surface. An
+            editor-first tool optimizes code navigation and repository work. An
+            analytics-first tool optimizes data sources, SQL, and sharing
+            results. A cloud ML platform optimizes managed jobs, permissions,
+            endpoints, and cloud resources.
+          </p>
+          <p>
+            CoCalc optimizes the long-lived technical project. That makes it
+            especially useful when notebooks are only one part of the actual
+            work.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Notebook positioning map">
+          <img
+            src="./assets/positioning-map.jpg"
+            alt="Positioning map of notebook tools by single notebook to durable project and local tool to managed platform"
+          />
+        </figure>
+      </section>
+
+      <section id="centers" class="chapter reverse">
+        <div class="chapter-number">02</div>
+        <div class="chapter-copy">
+          <h2>Many good products, different centers</h2>
+          <p>
+            If the task is a quick cloud notebook, Colab or Kaggle may be the
+            most direct path. If the task is a reactive Python document, marimo
+            is intentionally designed around that model. If the task is
+            AWS-managed ML, SageMaker Studio belongs in the conversation. If the
+            task is editing a repo with notebooks nearby, VS Code is natural.
+          </p>
+          <p>
+            CoCalc becomes more interesting when the notebook is not enough:
+            when you also need persistent Linux tools, shared files, long
+            outputs, a written paper, a course workflow, a history trail, a
+            collaborator watching the same state, or an agent that can operate
+            directly on the project.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Tool centers">
+          <img
+            src="./assets/centers.jpg"
+            alt="Comparison cards showing JupyterLab, VS Code, marimo, Colab, Deepnote, SageMaker, Hex, and CoCalc by center of gravity"
+          />
+        </figure>
+      </section>
+
+      <section id="project" class="chapter">
+        <div class="chapter-number">03</div>
+        <div class="chapter-copy">
+          <h2>When a notebook becomes a project</h2>
+          <p>
+            A real notebook rarely lives alone. It depends on data files,
+            package installs, shell commands, generated figures, drafts, scratch
+            scripts, and notes from the person who knows why a cell was written
+            that way.
+          </p>
+          <p>
+            CoCalc keeps the Jupyter notebook mental model, then wraps it in a
+            project. The project gives the notebook a filesystem, terminals,
+            synced editors, TimeTravel history, chat, collaborators, and admin
+            controls. That makes the notebook easier to trust after the first
+            exciting result.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Notebook becomes project">
+          <img
+            src="./assets/notebook-to-project.jpg"
+            alt="Illustration of a notebook expanding into a CoCalc project with notebooks, data, terminal, LaTeX, TimeTravel, Codex chat, snapshots, and course tools"
+          />
+        </figure>
+      </section>
+
+      <section id="differences" class="chapter reverse">
+        <div class="chapter-number">04</div>
+        <div class="chapter-copy">
+          <h2>What CoCalc adds to Jupyter</h2>
+          <p>
+            CoCalc's notebook UI stays close to standard Jupyter conventions,
+            but the surrounding system changes the failure modes. Execution is
+            backend-owned, so output can keep being captured after a browser
+            refresh or closed tab. Realtime collaboration is built into the
+            project model. TimeTravel records edits over time. Markdown cells
+            can be edited as rich text. Large notebooks are rendered efficiently
+            as you scroll.
+          </p>
+          <p>
+            The agent story is also different. Codex can use
+            <code>cocalc project jupyter</code> to inspect and act on the live
+            notebook state. It does not have to pretend that the saved
+            <code>.ipynb</code> file is always the exact state you are using in
+            the browser.
+          </p>
+        </div>
+        <figure
+          class="panel image-panel"
+          aria-label="CoCalc notebook differences"
+        >
+          <img
+            src="./assets/cocalc-difference.jpg"
+            alt="CoCalc notebook difference diagram with backend execution, realtime collaboration, TimeTravel, Codex live-state API, and files plus terminal"
+          />
+        </figure>
+      </section>
+
+      <section id="choose" class="chapter">
+        <div class="chapter-number">05</div>
+        <div class="chapter-copy">
+          <h2>Choose by workflow</h2>
+          <p>
+            The nicest comparison is usually not "which product wins?" It is
+            "which product starts closest to the work I have?"
+          </p>
+          <p>
+            Choose a quick hosted notebook when you want the least friction for
+            a single experiment. Choose local JupyterLab or marimo when the
+            notebook document itself is the craft. Choose VS Code when a code
+            repository and editor workflow are central. Choose analytics or ML
+            platforms when their data, dashboard, warehouse, or cloud services
+            are the main event.
+          </p>
+          <p>
+            Choose CoCalc when the notebook needs to live inside a durable
+            computational project: one place for notebooks, terminals, files,
+            writing, chat, collaborators, history, agents, teaching, and
+            deployable compute.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Choose notebook shape">
+          <img
+            src="./assets/choose-shape.jpg"
+            alt="Illustration choosing between quick experiments, local notebook craft, editor-first work, and a long-lived shared CoCalc project"
+          />
+        </figure>
+      </section>
+
+      <section class="strip">
+        <h2>How nearby products help explain CoCalc</h2>
+        <div class="loop">
+          <div>
+            <span>1</span>
+            <strong>JupyterLab</strong>
+            <p>
+              CoCalc keeps the familiar notebook idea, then adds project-level
+              collaboration, history, agents, and operations.
+            </p>
+          </div>
+          <div>
+            <span>2</span>
+            <strong>Colab and Kaggle</strong>
+            <p>
+              CoCalc is less about instant disposable notebooks and more about
+              work that needs to survive and grow.
+            </p>
+          </div>
+          <div>
+            <span>3</span>
+            <strong>Deepnote and Hex</strong>
+            <p>
+              CoCalc overlaps with collaborative notebooks, but its center is a
+              broader technical project, not only analytics delivery.
+            </p>
+          </div>
+          <div>
+            <span>4</span>
+            <strong>SageMaker and Databricks</strong>
+            <p>
+              CoCalc can use cloud compute, but it is not tied to one cloud or
+              warehouse platform as the organizing principle.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter reverse">
+        <div class="chapter-number">06</div>
+        <div class="chapter-copy">
+          <h2>Where CoCalc fits in the product family</h2>
+          <p>
+            The same notebook-centered project model appears at several sizes.
+            CoCalc Plus is the free personal path for one user on a local or SSH
+            reachable machine. Hosted CoCalc is the managed cloud path.
+            Launchpad is the small-team self-hosted path. Rocket is the
+            enterprise-grade scale-up.
+          </p>
+          <p>
+            That matters for notebook users because the UI and concepts do not
+            have to change when the deployment changes. A project can start as a
+            personal workspace, become a hosted collaboration, or move into a
+            self-hosted site with stronger local policy.
+          </p>
+        </div>
+        <figure class="panel code-card" aria-label="CoCalc deployment paths">
+          <h3>CoCalc paths</h3>
+          <ul>
+            <li><strong>Plus:</strong> free, local or SSH, one user.</li>
+            <li>
+              <strong>Hosted CoCalc:</strong> managed projects and compute.
+            </li>
+            <li><strong>Launchpad:</strong> self-hosted small team site.</li>
+            <li>
+              <strong>Rocket:</strong> enterprise scale with the same product
+              model.
+            </li>
+          </ul>
+        </figure>
+      </section>
+
+      <section id="sources" class="closing">
+        <p>
+          Product names here are used descriptively. The goal is orientation,
+          not ranking. For current details, read the official docs for
+          <a href="https://jupyterlab.readthedocs.io/">JupyterLab</a>,
+          <a href="https://code.visualstudio.com/docs/datascience/notebooks-web"
+            >VS Code notebooks</a
+          >, <a href="https://marimo.io/">marimo</a>,
+          <a href="https://colab.google/">Google Colab</a>,
+          <a href="https://www.kaggle.com/code">Kaggle notebooks</a>,
+          <a href="https://deepnote.com/">Deepnote</a>,
+          <a href="https://hex.tech/">Hex</a>,
+          <a href="https://aws.amazon.com/sagemaker/studio/">SageMaker Studio</a
+          >, and
+          <a href="https://www.databricks.com/product/notebooks"
+            >Databricks notebooks</a
+          >.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
