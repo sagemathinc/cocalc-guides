@@ -37,3 +37,6 @@ manuals. Each guide should be readable as a small standalone publication.
 - [CoCalc for Jupyter Users](./cocalc-for-jupyter/) - a comparison guide for
   understanding CoCalc alongside JupyterLab, Colab, Deepnote, SageMaker, VS
   Code, marimo, Hex, Kaggle, and other notebook-centered tools.
+- [CoCalc for LaTeX Users](./cocalc-for-latex/) - a comparison guide for
+  understanding CoCalc alongside Overleaf, local TeX editors, VS Code, LyX,
+  Tectonic, Typst, and other LaTeX workflows.

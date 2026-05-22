@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CoCalc for LaTeX Users</title>
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main>
+      <a class="site-home" href="../">CoCalc Guides</a>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">A CoCalc-AI field guide for technical writers</p>
+          <h1>CoCalc for LaTeX Users</h1>
+          <p class="dek">
+            If you know Overleaf, TeXstudio, TeXShop, VS Code, LyX, AUCTeX,
+            Tectonic, or Typst, the fastest way to understand CoCalc is this:
+            LaTeX lives inside the same durable project as the code, data,
+            notebooks, terminals, history, collaborators, and agents.
+          </p>
+        </div>
+        <figure class="hero-figure" aria-label="LaTeX landscape map">
+          <img
+            src="./assets/hero-landscape.jpg"
+            alt="Illustrated map of CoCalc for LaTeX users with nearby tools including Overleaf, VS Code, TeXstudio, TeXShop, Texifier, LyX, AUCTeX, Tectonic, and Typst"
+          />
+        </figure>
+      </section>
+
+      <nav class="toc" aria-label="Guide sections">
+        <a href="#tone">Not a scoreboard</a>
+        <a href="#map">The landscape</a>
+        <a href="#centers">Centers of gravity</a>
+        <a href="#project">Paper to project</a>
+        <a href="#differences">CoCalc differences</a>
+        <a href="#choose">Choose by workflow</a>
+        <a href="#sources">References</a>
+      </nav>
+
+      <section id="tone" class="intro">
+        <p>
+          LaTeX tools are personal. Some people love Overleaf because a
+          collaborator can open a link and edit immediately. Some love local
+          editors because everything is on their machine. Some live in VS Code,
+          Emacs, or Vim. Some prefer LyX's structured writing model. Some want
+          Tectonic-style reproducible builds or Typst's newer typesetting
+          language.
+        </p>
+        <p>
+          CoCalc is not trying to erase those instincts. It is for the moment
+          when the paper is more than <code>paper.tex</code>: figures from
+          Python, tables from Sage or R, a Jupyter notebook that justifies a
+          claim, terminal commands in the build, Git review, collaborators, and
+          an agent that can inspect the whole project.
+        </p>
+      </section>
+
+      <section id="map" class="chapter">
+        <div class="chapter-number">01</div>
+        <div class="chapter-copy">
+          <h2>Compare the center, not the checklist</h2>
+          <p>
+            Overleaf is the natural reference point for hosted LaTeX
+            collaboration. It makes sharing a paper simple, and its visual
+            editor mode is attractive when authors want more rendered structure
+            while still writing LaTeX.
+          </p>
+          <p>
+            Local editors make a different bet: fast keyboard workflows, local
+            files, editor extensions, and direct control over the TeX toolchain.
+            VS Code plus LaTeX Workshop belongs in that world, as do dedicated
+            editors such as TeXstudio, TeXShop, and Texifier.
+          </p>
+          <p>
+            CoCalc's center is the durable project. The LaTeX editor and PDF
+            build sit beside notebooks, terminals, source files, generated
+            figures, TimeTravel, chat, and Codex.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="LaTeX positioning map">
+          <img
+            src="./assets/positioning-map.jpg"
+            alt="Positioning map of LaTeX tools by single document to durable project and local editor to hosted collaboration"
+          />
+        </figure>
+      </section>
+
+      <section id="centers" class="chapter reverse">
+        <div class="chapter-number">02</div>
+        <div class="chapter-copy">
+          <h2>Many good products, different centers</h2>
+          <p>
+            Choose Overleaf when the main task is collaborative paper editing
+            with almost no setup. Choose TeXstudio, TeXShop, Texifier, AUCTeX,
+            or VimTeX when local editing craft and the TeX toolchain are the
+            main event. Choose VS Code when the paper lives near a code
+            repository and editor extensions. Choose LyX when structured writing
+            is the desired writing model.
+          </p>
+          <p>
+            Choose CoCalc when the paper is a technical project: the PDF depends
+            on code, notebooks, shell commands, data files, collaborators,
+            history, and an AI assistant that should understand the project
+            rather than only the current paragraph.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="LaTeX tool centers">
+          <img
+            src="./assets/centers.jpg"
+            alt="Comparison cards showing Overleaf, VS Code, TeXstudio, TeXShop, LyX, AUCTeX and VimTeX, Tectonic, and CoCalc by center of gravity"
+          />
+        </figure>
+      </section>
+
+      <section id="project" class="chapter">
+        <div class="chapter-number">03</div>
+        <div class="chapter-copy">
+          <h2>When a paper becomes a project</h2>
+          <p>
+            A mathematical or scientific paper usually has a larger working tree
+            than the final PDF suggests: <code>.tex</code> files, bibliography
+            files, figures, source data, scripts, generated tables, build logs,
+            notebooks, and notes from collaborators.
+          </p>
+          <p>
+            CoCalc keeps those pieces in one place. A terminal can run
+            <code>latexmk</code>, Python, SageMath, R, or a custom figure
+            script. A notebook can regenerate evidence. Codex can read the draft
+            and the code that supports it. TimeTravel and Git review make
+            changes inspectable after the writing session ends.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Paper becomes project">
+          <img
+            src="./assets/paper-to-project.jpg"
+            alt="Illustration of paper.tex expanding into a CoCalc project with figures, bibliography, terminal, Jupyter, Python, Sage, R, Codex chat, TimeTravel, and Git review"
+          />
+        </figure>
+      </section>
+
+      <section id="differences" class="chapter reverse">
+        <div class="chapter-number">04</div>
+        <div class="chapter-copy">
+          <h2>What CoCalc adds around LaTeX</h2>
+          <p>
+            CoCalc does not currently try to match every LaTeX-specific editing
+            feature of Overleaf or every keyboard trick of a local editor.
+            Overleaf's visual editor mode is a real advantage for some authors,
+            and specialized local editors are excellent at fast TeX editing.
+          </p>
+          <p>
+            CoCalc's advantage is the project around the paper. You can build a
+            paper with live terminal logs, regenerate figures in Jupyter, run
+            Python/Sage/R as part of the workflow, ask Codex to inspect the
+            draft and supporting files, and use TimeTravel to recover or explain
+            changes.
+          </p>
+          <p>
+            CoCalc Plus adds another shape: a lightweight local CoCalc on your
+            own laptop or SSH machine, with TimeTravel and Codex integration,
+            without needing a hosted writing service.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="CoCalc LaTeX differences">
+          <img
+            src="./assets/cocalc-difference.jpg"
+            alt="CoCalc LaTeX difference diagram with Jupyter evidence, terminal build logs, Codex paper assistant, TimeTravel history, and CoCalc Plus local mode"
+          />
+        </figure>
+      </section>
+
+      <section id="choose" class="chapter">
+        <div class="chapter-number">05</div>
+        <div class="chapter-copy">
+          <h2>Choose by writing workflow</h2>
+          <p>
+            The useful question is not "which LaTeX tool wins?" It is "where is
+            the work already happening?"
+          </p>
+          <p>
+            If the paper is mostly collaborative prose and formulas, Overleaf is
+            often the shortest path. If the paper is mostly local TeX craft,
+            dedicated editors and editor plugins are hard to beat. If the paper
+            is part of a larger repository, VS Code may fit naturally.
+          </p>
+          <p>
+            If the paper depends on computation, project files, command-line
+            tools, notebooks, course material, live collaboration, or agent
+            help, CoCalc starts closer to the whole workflow.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Choose LaTeX shape">
+          <img
+            src="./assets/choose-shape.jpg"
+            alt="Illustration choosing between hosted paper collaboration, local editor craft, editor-first writing, and a computational CoCalc paper project"
+          />
+        </figure>
+      </section>
+
+      <section class="strip">
+        <h2>How nearby tools help explain CoCalc</h2>
+        <div class="loop">
+          <div>
+            <span>1</span>
+            <strong>Overleaf</strong>
+            <p>
+              CoCalc overlaps with hosted collaborative LaTeX, but the paper is
+              part of a broader computational project.
+            </p>
+          </div>
+          <div>
+            <span>2</span>
+            <strong>Local TeX editors</strong>
+            <p>
+              CoCalc is less about maximal editor customization and more about
+              keeping the build, data, and collaborators together.
+            </p>
+          </div>
+          <div>
+            <span>3</span>
+            <strong>VS Code</strong>
+            <p>
+              CoCalc is project-first too, but the project includes notebooks,
+              terminals, LaTeX, chat, TimeTravel, and browser collaboration.
+            </p>
+          </div>
+          <div>
+            <span>4</span>
+            <strong>Tectonic and Typst</strong>
+            <p>
+              CoCalc can host modern build tools, but its main claim is the
+              durable workspace around the writing.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter reverse">
+        <div class="chapter-number">06</div>
+        <div class="chapter-copy">
+          <h2>Where CoCalc fits in the product family</h2>
+          <p>
+            Hosted CoCalc is the managed path for collaborative computational
+            papers. CoCalc Plus is the free local or SSH path for one user who
+            wants the same style of workspace on their own machine. Launchpad is
+            the self-hosted small-team path. Rocket is the enterprise-grade
+            scale-up.
+          </p>
+          <p>
+            That makes CoCalc unusual for LaTeX: the same paper workflow can
+            start as a personal local workspace, become a hosted collaboration,
+            or move into a self-hosted site without changing the basic project
+            model.
+          </p>
+        </div>
+        <figure class="panel code-card" aria-label="CoCalc LaTeX fit">
+          <h3>Good fits</h3>
+          <ul>
+            <li>A paper whose figures or tables come from code.</li>
+            <li>A course where students submit LaTeX and notebooks.</li>
+            <li>A research group that wants paper, data, and chat together.</li>
+            <li>A local laptop workflow with CoCalc Plus and TimeTravel.</li>
+          </ul>
+        </figure>
+      </section>
+
+      <section id="sources" class="closing">
+        <p>
+          Product names here are used descriptively. The goal is orientation,
+          not ranking. For current details, read the official pages for
+          <a href="https://www.overleaf.com/">Overleaf</a>,
+          <a
+            href="https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop"
+            >LaTeX Workshop for VS Code</a
+          >, <a href="https://www.texstudio.org/">TeXstudio</a>,
+          <a href="https://pages.uoregon.edu/koch/texshop/">TeXShop</a>,
+          <a href="https://www.texifier.com/">Texifier</a>,
+          <a href="https://www.lyx.org/">LyX</a>,
+          <a href="https://www.gnu.org/software/auctex/">AUCTeX</a>,
+          <a href="https://github.com/lervag/vimtex">VimTeX</a>,
+          <a href="https://tectonic-typesetting.github.io/">Tectonic</a>, and
+          <a href="https://typst.app/">Typst</a>.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
