@@ -19,54 +19,10 @@
           </p>
         </div>
         <figure class="hero-figure" aria-label="Software installation map">
-          <svg viewBox="0 0 760 500" role="img">
-            <title>Software installation map</title>
-            <rect class="wash" x="34" y="38" width="692" height="398" rx="30" />
-            <rect
-              class="terminal-card"
-              x="74"
-              y="86"
-              width="300"
-              height="212"
-              rx="18"
-            />
-            <path
-              class="prompt-line"
-              d="M108 132h94M108 170h176M108 208h138M108 246h202"
-            />
-            <path class="prompt-mark" d="M102 132l18 12-18 12" />
-            <circle class="agent" cx="548" cy="148" r="58" />
-            <path class="agent-face" d="M526 149h44M529 169c14 12 29 12 43 0" />
-            <path class="arrow" d="M386 166c42-45 80-54 111-34" />
-            <path class="arrow" d="M502 207c-38 45-80 58-124 39" />
-            <rect
-              class="layer layer-a"
-              x="430"
-              y="268"
-              width="214"
-              height="42"
-              rx="12"
-            />
-            <rect
-              class="layer layer-b"
-              x="398"
-              y="322"
-              width="278"
-              height="42"
-              rx="12"
-            />
-            <rect
-              class="layer layer-c"
-              x="366"
-              y="376"
-              width="342"
-              height="42"
-              rx="12"
-            />
-            <path class="layer-line" d="M462 289h124M430 343h186M398 397h220" />
-            <circle class="snap" cx="216" cy="362" r="48" />
-            <path class="snap-check" d="M194 363l17 17 34-44" />
-          </svg>
+          <img
+            src="./assets/hero-install.png"
+            alt="Illustrated workflow connecting a terminal, Codex assistant, package layers, verification, and a snapshot checkpoint"
+          />
         </figure>
       </section>
 
@@ -109,46 +65,11 @@
             wrong layer.
           </p>
         </div>
-        <figure class="panel" aria-label="Three software layers">
-          <svg viewBox="0 0 660 360" role="img">
-            <title>Three software layers</title>
-            <rect
-              class="big-card"
-              x="70"
-              y="58"
-              width="520"
-              height="234"
-              rx="24"
-            />
-            <rect
-              class="stack stack-top"
-              x="130"
-              y="92"
-              width="400"
-              height="54"
-              rx="14"
-            />
-            <rect
-              class="stack stack-mid"
-              x="112"
-              y="158"
-              width="436"
-              height="54"
-              rx="14"
-            />
-            <rect
-              class="stack stack-bottom"
-              x="94"
-              y="224"
-              width="472"
-              height="54"
-              rx="14"
-            />
-            <path class="label-line" d="M172 119h178M154 185h224M136 251h270" />
-            <circle class="tiny-icon" cx="450" cy="119" r="16" />
-            <circle class="tiny-icon" cx="472" cy="185" r="16" />
-            <circle class="tiny-icon" cx="494" cy="251" r="16" />
-          </svg>
+        <figure class="panel image-panel" aria-label="Three software layers">
+          <img
+            src="./assets/software-layers.png"
+            alt="Illustration of project files, language packages, and system packages as three layers in a CoCalc-AI environment"
+          />
         </figure>
       </section>
 
@@ -170,32 +91,14 @@
             verify the result before calling it done.
           </p>
         </div>
-        <figure class="panel" aria-label="Error becomes an install plan">
-          <svg viewBox="0 0 660 360" role="img">
-            <title>Error becomes an install plan</title>
-            <rect
-              class="error-card"
-              x="74"
-              y="78"
-              width="230"
-              height="156"
-              rx="18"
-            />
-            <path class="bad-line" d="M112 124h126M112 164h154M112 204h96" />
-            <path class="arrow strong" d="M320 164c46-38 88-38 128 0" />
-            <rect
-              class="plan-card"
-              x="460"
-              y="78"
-              width="126"
-              height="156"
-              rx="18"
-            />
-            <path class="check" d="M492 126l14 14 28-38" />
-            <path class="check" d="M492 174l14 14 28-38" />
-            <path class="check" d="M492 222l14 14 28-38" />
-            <circle class="agent small" cx="360" cy="252" r="34" />
-          </svg>
+        <figure
+          class="panel image-panel"
+          aria-label="Error becomes an install plan"
+        >
+          <img
+            src="./assets/error-to-plan.png"
+            alt="Illustration of Codex turning an error message into a narrow installation plan and verification checklist"
+          />
         </figure>
       </section>
 
@@ -215,25 +118,14 @@ dot -V</code></pre>
             package. The third proves the command exists.
           </p>
         </div>
-        <figure class="panel terminal-panel" aria-label="Apt install terminal">
-          <svg viewBox="0 0 660 360" role="img">
-            <title>Apt install terminal</title>
-            <rect
-              class="terminal-large"
-              x="72"
-              y="70"
-              width="516"
-              height="220"
-              rx="20"
-            />
-            <circle class="window-dot" cx="106" cy="104" r="8" />
-            <circle class="window-dot" cx="132" cy="104" r="8" />
-            <circle class="window-dot" cx="158" cy="104" r="8" />
-            <path class="terminal-line gold" d="M112 154h218" />
-            <path class="terminal-line" d="M112 190h300" />
-            <path class="terminal-line teal" d="M112 226h182" />
-            <path class="terminal-line" d="M112 260h250" />
-          </svg>
+        <figure
+          class="panel image-panel terminal-panel"
+          aria-label="Apt install terminal"
+        >
+          <img
+            src="./assets/apt-install.png"
+            alt="Illustration of apt installing system packages into an Ubuntu root filesystem and ending with a verification check"
+          />
         </figure>
       </section>
 
@@ -254,28 +146,11 @@ dot -V</code></pre>
             is actually using.
           </p>
         </div>
-        <figure class="panel" aria-label="Language package lanes">
-          <svg viewBox="0 0 660 360" role="img">
-            <title>Language package lanes</title>
-            <rect
-              class="lane-card"
-              x="76"
-              y="62"
-              width="508"
-              height="236"
-              rx="22"
-            />
-            <path class="lane" d="M124 122h380" />
-            <path class="lane" d="M124 178h380" />
-            <path class="lane" d="M124 234h380" />
-            <circle class="pkg py" cx="178" cy="122" r="22" />
-            <circle class="pkg node" cx="296" cy="178" r="22" />
-            <circle class="pkg r" cx="426" cy="234" r="22" />
-            <path
-              class="small-stroke"
-              d="M220 122h180M338 178h112M468 234h70"
-            />
-          </svg>
+        <figure class="panel image-panel" aria-label="Language package lanes">
+          <img
+            src="./assets/language-packages.png"
+            alt="Illustration of language packages flowing to the matching notebook, terminal, and project environments"
+          />
         </figure>
       </section>
 
@@ -328,26 +203,11 @@ dot -V</code></pre>
             Codex to snapshot first and record what it changed afterward.
           </div>
         </div>
-        <figure class="panel" aria-label="Snapshot safety net">
-          <svg viewBox="0 0 660 360" role="img">
-            <title>Snapshot safety net</title>
-            <rect
-              class="container-box"
-              x="90"
-              y="76"
-              width="258"
-              height="206"
-              rx="24"
-            />
-            <path
-              class="container-line"
-              d="M134 128h154M134 168h116M134 208h174"
-            />
-            <path class="arrow strong" d="M362 180c46-52 98-56 150-12" />
-            <circle class="snapshot" cx="526" cy="176" r="62" />
-            <path class="snap-check" d="M500 178l20 20 42-56" />
-            <path class="restore-line" d="M514 252c-84 50-176 48-282 8" />
-          </svg>
+        <figure class="panel image-panel" aria-label="Snapshot safety net">
+          <img
+            src="./assets/snapshot-safety.png"
+            alt="Illustration of taking a snapshot before a risky install and restoring the container root filesystem if needed"
+          />
         </figure>
       </section>
 

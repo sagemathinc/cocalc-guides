@@ -138,11 +138,16 @@ h2 {
   margin: 0;
 }
 
-.hero-figure svg,
-.panel svg {
+.hero-figure img,
+.image-panel img {
   display: block;
   width: 100%;
   height: auto;
+}
+
+.hero-figure img {
+  border-radius: 24px;
+  box-shadow: 0 18px 50px rgb(37 53 58 / 10%);
 }
 
 .toc {
@@ -298,130 +303,6 @@ blockquote {
   border-top: 1px solid rgb(30 42 47 / 12%);
   margin-bottom: 80px;
   padding-top: 48px;
-}
-
-/* Hand-drawn SVG language */
-.wash,
-.big-card,
-.terminal-card,
-.terminal-large,
-.error-card,
-.plan-card,
-.lane-card,
-.container-box {
-  fill: rgb(255 255 255 / 72%);
-  stroke: #26383f;
-  stroke-width: 4;
-}
-
-.wash {
-  fill: #f4f0e7;
-  stroke: none;
-}
-
-.layer,
-.stack,
-.snapshot,
-.snap,
-.agent,
-.pkg {
-  stroke: #26383f;
-  stroke-width: 4;
-}
-
-.layer,
-.stack {
-  fill: #eef7f4;
-}
-
-.layer-b,
-.stack-mid {
-  fill: #f7dfac;
-}
-
-.layer-c,
-.stack-bottom {
-  fill: #e8edf4;
-}
-
-.agent {
-  fill: #2a8f82;
-}
-
-.snapshot,
-.snap {
-  fill: #d49b39;
-}
-
-.pkg.py {
-  fill: #2f6f9f;
-}
-
-.pkg.node {
-  fill: #2a8f82;
-}
-
-.pkg.r {
-  fill: #d49b39;
-}
-
-.prompt-line,
-.layer-line,
-.label-line,
-.terminal-line,
-.bad-line,
-.small-stroke,
-.container-line,
-.lane {
-  fill: none;
-  stroke: #66767b;
-  stroke-linecap: round;
-  stroke-width: 8;
-}
-
-.terminal-line.gold {
-  stroke: var(--gold);
-}
-
-.terminal-line.teal {
-  stroke: var(--teal);
-}
-
-.bad-line {
-  stroke: var(--coral);
-}
-
-.prompt-mark,
-.agent-face,
-.arrow,
-.restore-line {
-  fill: none;
-  stroke: #2f6f9f;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 7;
-}
-
-.arrow.strong {
-  stroke: var(--gold);
-}
-
-.check,
-.snap-check {
-  fill: none;
-  stroke: #2a8f82;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 10;
-}
-
-.snap-check {
-  stroke: #fffdf8;
-}
-
-.tiny-icon,
-.window-dot {
-  fill: var(--gold);
 }
 
 @media (max-width: 920px) {
