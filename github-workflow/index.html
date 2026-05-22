@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Using GitHub from CoCalc-AI</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">A CoCalc-AI field guide for software teams</p>
+          <h1>Using GitHub from CoCalc-AI</h1>
+          <p class="dek">
+            Install <code>gh</code>, authenticate once, then let Codex help with
+            issues, pull requests, release notes, and repository maintenance
+            from the same collaborative project where the code runs.
+          </p>
+        </div>
+        <figure class="hero-figure" aria-label="GitHub workflow map">
+          <img
+            src="./assets/hero-github.png"
+            alt="Illustrated workflow connecting a terminal, Codex assistant, pull request path, repository checks, and collaborator cursors"
+          />
+        </figure>
+      </section>
+
+      <nav class="toc" aria-label="Guide sections">
+        <a href="#install">Install gh</a>
+        <a href="#auth">Authenticate carefully</a>
+        <a href="#repo">Work from a real checkout</a>
+        <a href="#codex">Ask GitHub-shaped questions</a>
+        <a href="#pull-requests">Use pull requests as the trail</a>
+        <a href="#releases">Let releases be boring</a>
+      </nav>
+
+      <section class="intro">
+        <p>
+          GitHub becomes much more useful when it is available from the same
+          place as the terminal, editor, notebook, chat, and agent thread.
+          CoCalc-AI gives you that place.
+        </p>
+        <p>
+          This guide follows the simplest setup: install the GitHub CLI,
+          authenticate, clone or open a repository, and ask Codex to do useful
+          GitHub work through commands you can inspect.
+        </p>
+        <p>
+          The collaborative part matters. A teammate can watch the same terminal
+          session, read the same Codex thread, review the same branch, and see
+          exactly how an issue became a pull request.
+        </p>
+      </section>
+
+      <section id="install" class="chapter">
+        <div class="chapter-number">01</div>
+        <div class="chapter-copy">
+          <h2>Install the GitHub CLI</h2>
+          <p>
+            CoCalc-AI projects are Ubuntu environments. If <code>gh</code> is
+            missing, install it with <code>apt</code>:
+          </p>
+          <pre><code>sudo apt update
+sudo apt install -y gh
+gh --version</code></pre>
+          <p>
+            The last command is not decoration. It verifies that the tool you
+            wanted is actually on the path before you build a workflow around
+            it.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Install gh with apt">
+          <img
+            src="./assets/install-gh.png"
+            alt="Illustration of a CoCalc-AI terminal installing GitHub CLI packages and ending with a verification check"
+          />
+        </figure>
+      </section>
+
+      <section id="auth" class="chapter reverse">
+        <div class="chapter-number">02</div>
+        <div class="chapter-copy">
+          <h2>Authenticate carefully</h2>
+          <p>
+            Run <code>gh auth login</code> and follow the prompts. For most
+            projects, GitHub.com, HTTPS, and browser or device-code
+            authentication are the straightforward choices.
+          </p>
+          <pre><code>gh auth login
+gh auth status</code></pre>
+          <p>
+            Treat the resulting credential like a real secret. In a shared
+            project, only authenticate when the collaborators and permission
+            model match what you intend to do.
+          </p>
+          <div class="callout">
+            <strong>Good habit:</strong> use the least powerful GitHub account
+            or token that can do the job, especially in teaching projects,
+            demos, or temporary collaborations.
+          </div>
+        </div>
+        <figure class="panel image-panel" aria-label="Authenticate gh">
+          <img
+            src="./assets/auth-login.png"
+            alt="Illustration of GitHub CLI authentication with a terminal, key, browser login card, and unlocked repository"
+          />
+        </figure>
+      </section>
+
+      <section id="repo" class="chapter">
+        <div class="chapter-number">03</div>
+        <div class="chapter-copy">
+          <h2>Work from a real checkout</h2>
+          <p>
+            A useful GitHub session starts with a real local checkout. Codex can
+            inspect files, run tests, commit changes, and use <code>gh</code> to
+            talk to GitHub.
+          </p>
+          <pre><code>gh repo clone owner/project
+cd project
+git status
+gh repo view --web</code></pre>
+          <p>
+            Once the repository is local, the project becomes the shared work
+            surface: code, logs, terminal history, chat, and GitHub state are no
+            longer separate stories.
+          </p>
+        </div>
+        <figure class="panel code-card" aria-label="Repository workflow">
+          <h3>Useful first questions</h3>
+          <ul>
+            <li>What branch am I on?</li>
+            <li>What files are changed?</li>
+            <li>Which tests should I run?</li>
+            <li>Is there already an issue for this?</li>
+          </ul>
+        </figure>
+      </section>
+
+      <section id="codex" class="strip">
+        <h2>Ask Codex for GitHub-shaped work</h2>
+        <div class="loop">
+          <div>
+            <span>1</span>
+            <strong>Triage</strong>
+            <p>
+              Summarize an issue, find related code, and propose a small plan.
+            </p>
+          </div>
+          <div>
+            <span>2</span>
+            <strong>Implement</strong>
+            <p>Make the branch, edit files, run focused checks, and commit.</p>
+          </div>
+          <div>
+            <span>3</span>
+            <strong>Publish</strong>
+            <p>Create a pull request with a clear title and useful body.</p>
+          </div>
+          <div>
+            <span>4</span>
+            <strong>Follow up</strong>
+            <p>
+              Read review comments, push fixes, and keep the trail coherent.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="pull-requests" class="chapter reverse">
+        <div class="chapter-number">04</div>
+        <div class="chapter-copy">
+          <h2>Use pull requests as the trail</h2>
+          <p>
+            Pull requests are where agent work becomes reviewable team work. A
+            good PR says what changed, why it changed, and how it was checked.
+          </p>
+          <pre><code>git switch -c fix/notebook-export
+git commit
+gh pr create --fill
+gh pr checks --watch</code></pre>
+          <p>
+            This is where CoCalc-AI’s realtime collaboration is unusual: someone
+            else can be in the project while the PR is being prepared, watching
+            tests, reading Codex’s reasoning, or taking over the terminal if
+            needed.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Issues and pull requests">
+          <img
+            src="./assets/issues-prs.png"
+            alt="Illustration of Codex helping turn issue cards, code edits, branch flow, and a pull request checklist into reviewable work"
+          />
+        </figure>
+      </section>
+
+      <section id="releases" class="chapter">
+        <div class="chapter-number">05</div>
+        <div class="chapter-copy">
+          <h2>Let releases be boring</h2>
+          <p>
+            Release work often fails because it is half memory and half shell
+            history. Use Codex and <code>gh</code> to make it explicit.
+          </p>
+          <blockquote>
+            Read the merged PRs since the last tag, draft release notes, build
+            the Linux artifact, verify its checksum, and create a draft GitHub
+            release for me to review.
+          </blockquote>
+          <p>
+            Codex can collect the facts, but the release should still be a
+            human-reviewed artifact. The goal is not magic. The goal is a
+            boring, inspectable process.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="GitHub release workflow">
+          <img
+            src="./assets/releases.png"
+            alt="Illustration of a terminal, release tag, changelog, package artifact, and verification checks flowing into a GitHub release"
+          />
+        </figure>
+      </section>
+
+      <section class="closing">
+        <h2>GitHub becomes part of the workspace</h2>
+        <p>
+          The practical pattern is simple: install <code>gh</code>, authenticate
+          intentionally, work from a real checkout, and ask Codex to make GitHub
+          actions visible through commands, commits, pull requests, and review
+          notes.
+        </p>
+        <p>
+          In CoCalc-AI, this is not trapped in one person’s laptop. The
+          terminal, files, chat, agent thread, and GitHub workflow can all be
+          shared live in the same project.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

@@ -71,7 +71,7 @@
 
       .guides {
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 22px;
         margin-top: 64px;
       }
@@ -113,9 +113,29 @@
         font-weight: 700;
       }
 
+      code {
+        border: 1px solid rgb(47 111 159 / 18%);
+        border-radius: 6px;
+        background: rgb(47 111 159 / 8%);
+        padding: 0.08rem 0.3rem;
+        font:
+          0.88em/1.35 ui-monospace,
+          SFMono-Regular,
+          Menlo,
+          Monaco,
+          Consolas,
+          monospace;
+      }
+
       @media (max-width: 760px) {
         .guides {
           grid-template-columns: 1fr;
+        }
+      }
+
+      @media (min-width: 761px) and (max-width: 1040px) {
+        .guides {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
         }
       }
     </style>
@@ -144,6 +164,14 @@
           <p>
             Use the terminal, Codex, apt, language packages, snapshots, and
             shared terminal history to make a project environment work.
+          </p>
+        </a>
+        <a class="guide" href="./github-workflow/">
+          <span>GitHub workflow</span>
+          <strong>Using GitHub from CoCalc-AI</strong>
+          <p>
+            Install <code>gh</code>, authenticate, and let Codex help with
+            issues, pull requests, releases, and reviews.
           </p>
         </a>
       </div>
