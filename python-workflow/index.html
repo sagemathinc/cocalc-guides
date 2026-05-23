@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Python in CoCalc: From Notebook to Script to Paper</title>
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main>
+      <a class="site-home" href="../">CoCalc Guides</a>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">A CoCalc-AI field guide for Python work</p>
+          <h1>Python in CoCalc</h1>
+          <p class="dek">
+            Start in a notebook, move stable ideas into scripts, run the real
+            environment from a terminal, and bring the result into a paper or
+            report without leaving the project.
+          </p>
+        </div>
+        <figure class="hero-figure" aria-label="Python workflow in CoCalc">
+          <img
+            src="./assets/hero-python-workflow.png"
+            alt="Illustrated CoCalc Python workflow from Jupyter notebook to model.py to paper.tex with terminal, package environment, and Codex"
+          />
+        </figure>
+      </section>
+
+      <nav class="toc" aria-label="Guide sections">
+        <a href="#positioning">Where it fits</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#linux">Real Linux</a>
+        <a href="#codex">Codex</a>
+        <a href="#teaching">Teaching</a>
+        <a href="#paper">Papers</a>
+      </nav>
+
+      <section class="intro">
+        <p>
+          Python in CoCalc is not a single product surface. It is a language
+          that can move through several surfaces in one shared project:
+          notebooks, <code>.py</code> files, terminals, package environments,
+          LaTeX, markdown, chat, course assignments, and agent workflows.
+        </p>
+        <p>
+          That is the important difference. A notebook is great for exploration,
+          a script is better for reusable code, a terminal is often the right
+          place to install and run things, and a paper or report is where the
+          result becomes communication. CoCalc keeps those stages together.
+        </p>
+      </section>
+
+      <section id="positioning" class="chapter">
+        <div class="chapter-number">01</div>
+        <div class="chapter-copy">
+          <h2>Think project first, not notebook first</h2>
+          <p>
+            Many Python tools start with a single interface: a notebook, an IDE,
+            a terminal, or a hosted runtime. CoCalc starts with the project. The
+            project contains the files, runtime, collaborators, chat, history,
+            snapshots, backups, and agents.
+          </p>
+          <p>
+            That makes it natural to change modes. A notebook can produce a
+            prototype. A script can turn that prototype into something testable.
+            A terminal can install packages and run jobs. A LaTeX document can
+            use the figures and tables that the code produced.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="One Python project">
+          <img
+            src="./assets/one-python-project.png"
+            alt="Diagram showing one project connected to notebook, script, terminal, packages, paper, and Codex"
+          />
+        </figure>
+      </section>
+
+      <section id="workflow" class="strip">
+        <h2>One useful Python workflow</h2>
+        <div class="cards">
+          <div>
+            <span>1</span>
+            <strong>Explore</strong>
+            <p>
+              Start with <code>analysis.ipynb</code>. Load data, plot quickly,
+              test assumptions, and keep the exploratory record.
+            </p>
+          </div>
+          <div>
+            <span>2</span>
+            <strong>Factor</strong>
+            <p>
+              Move stable code into <code>model.py</code>, a small package, or
+              tests so the work can be rerun and reviewed.
+            </p>
+          </div>
+          <div>
+            <span>3</span>
+            <strong>Run</strong>
+            <p>
+              Use a terminal for <code>uv</code>, <code>pip</code>,
+              <code>conda</code>, Git, long-running jobs, and direct checks.
+            </p>
+          </div>
+          <div>
+            <span>4</span>
+            <strong>Publish</strong>
+            <p>
+              Put figures, tables, and explanations into LaTeX, markdown,
+              slides, or a course assignment.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="linux" class="chapter reverse">
+        <div class="chapter-number">02</div>
+        <div class="chapter-copy">
+          <h2>It is real Python on real Linux</h2>
+          <p>
+            CoCalc-AI projects are full Linux environments. You can use
+            <code>sudo</code>, install Ubuntu packages with <code>apt</code>,
+            create virtual environments, use <code>uv</code>, <code>pip</code>,
+            or <code>conda</code>, and install native libraries when Python
+            packages need them.
+          </p>
+          <p>
+            This matters because serious Python work often depends on more than
+            Python. Compilers, system libraries, command-line tools, TeX,
+            databases, data files, and service processes can all be part of the
+            same project environment.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Real Python on Linux">
+          <img
+            src="./assets/real-python-linux.png"
+            alt="Diagram showing Ubuntu, sudo, apt, pip, uv, conda, venv, Jupyter, terminal, snapshots, and RootFS"
+          />
+        </figure>
+      </section>
+
+      <section id="codex" class="chapter">
+        <div class="chapter-number">03</div>
+        <div class="chapter-copy">
+          <h2>Codex is strongest at the boundaries</h2>
+          <p>
+            Python problems often cross file and tool boundaries: an import
+            error caused by a missing system library, a notebook state mismatch,
+            a failing test, a figure saved to the wrong path, or a dependency
+            that belongs in the project setup notes.
+          </p>
+          <p>
+            Codex can inspect the files, terminal output, package state, and
+            notebook context together. That makes it useful for practical jobs:
+            create a virtual environment, diagnose a package install failure,
+            move notebook code into a module, write tests, or update a paper to
+            use the latest generated figure.
+          </p>
+        </div>
+        <div class="panel callout">
+          <h3>Good prompts</h3>
+          <p>
+            "Move the reusable code from this notebook into a Python module and
+            update the notebook to import it." "Figure out why this package
+            import fails." "Create a small test for this script." "Make the
+            paper use the figure this script generated."
+          </p>
+        </div>
+      </section>
+
+      <section id="teaching" class="chapter reverse">
+        <div class="chapter-number">04</div>
+        <div class="chapter-copy">
+          <h2>Teaching Python is mostly environment management</h2>
+          <p>
+            In a class, the hard part is rarely explaining <code>for</code>
+            loops. The hard part is getting every student into the same working
+            environment with the right packages, data, notebooks, scripts, and
+            grading tools.
+          </p>
+          <p>
+            CoCalc courses can give each student a project, assign and collect
+            work automatically, use nbgrader for notebooks, and rely on
+            TimeTravel, snapshots, and reusable RootFS images when students need
+            help or recovery.
+          </p>
+        </div>
+        <div class="panel comparison">
+          <h3>What this changes</h3>
+          <ul>
+            <li>Students work in the same Python stack.</li>
+            <li>Instructors can inspect the actual project state.</li>
+            <li>
+              Assignments can include notebooks, scripts, data, and tests.
+            </li>
+            <li>RootFS images make the course environment reusable.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="paper" class="chapter">
+        <div class="chapter-number">05</div>
+        <div class="chapter-copy">
+          <h2>The paper can stay connected to the computation</h2>
+          <p>
+            A common research pattern is to explore in a notebook, clean up the
+            code, generate figures or tables, then write the result. CoCalc is
+            built for that kind of mixed work because the paper, scripts,
+            notebooks, data, and terminal commands all live in one place.
+          </p>
+          <p>
+            You can use normal Python-driven document workflows, including
+            PythonTeX-style or PyTeX-style projects when they are installed and
+            configured in the project. More importantly, the code that produced
+            the result remains nearby and inspectable.
+          </p>
+        </div>
+        <div class="panel callout">
+          <h3>A good end state</h3>
+          <p>
+            The notebook explains the exploration, <code>model.py</code>
+            reproduces the result, the terminal documents the environment, and
+            <code>paper.tex</code> includes the figure that the script produced.
+          </p>
+        </div>
+      </section>
+
+      <section class="final">
+        <h2>Python is a project language in CoCalc</h2>
+        <p>
+          Use notebooks when they help, scripts when they help, terminals when
+          they help, and papers when the result needs to be communicated. CoCalc
+          is the place where those modes stay connected.
+        </p>
+        <a href="https://cocalc.com/features/python"
+          >See the Python feature page</a
+        >
+      </section>
+    </main>
+  </body>
+</html>
