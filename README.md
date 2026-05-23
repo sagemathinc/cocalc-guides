@@ -43,3 +43,6 @@ manuals. Each guide should be readable as a small standalone publication.
 - [CoCalc for Agent Sandboxes](./agent-sandbox-cloud/) - a positioning guide
   for CoCalc as a durable collaborative Linux project cloud for agents and
   humans, distinct from public app hosting.
+- [How CoCalc-AI Works](./how-cocalc-works/) - a friendly architecture guide to
+  bays, project hosts, direct browser routing, off-runtime sync, R2/Rustic
+  storage, and the Launchpad to Rocket scale path.

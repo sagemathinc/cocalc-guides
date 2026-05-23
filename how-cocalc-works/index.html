@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>How CoCalc-AI Works</title>
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main>
+      <a class="site-home" href="../">CoCalc Guides</a>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">A CoCalc-AI architecture field guide</p>
+          <h1>How CoCalc-AI Works</h1>
+          <p class="dek">
+            CoCalc-AI is a distributed project cloud. A bay handles account and
+            control-plane state. A project host runs durable Linux projects. The
+            browser talks to both, so collaboration stays responsive while
+            compute, files, backups, and agents remain concrete and recoverable.
+          </p>
+        </div>
+        <figure class="hero-figure" aria-label="CoCalc architecture overview">
+          <img
+            src="./assets/hero-architecture.jpg"
+            alt="Illustrated overview of CoCalc-AI with browser, bay, project host, control plane, and direct project connection"
+          />
+        </figure>
+      </section>
+
+      <nav class="toc" aria-label="Guide sections">
+        <a href="#nouns">Three nouns</a>
+        <a href="#routing">Routing</a>
+        <a href="#host">Project host</a>
+        <a href="#sync">Off project</a>
+        <a href="#storage">Storage</a>
+        <a href="#scale">Launchpad to Rocket</a>
+        <a href="#sources">Source</a>
+      </nav>
+
+      <section class="intro">
+        <p>
+          The easiest way to understand CoCalc is to stop picturing one large
+          web server. CoCalc is a set of control-plane services, project-host
+          machines, and durable project directories. The hard work is making
+          those pieces feel like one application without forcing all traffic
+          through one bottleneck.
+        </p>
+        <p>
+          This guide is not a formal reference manual. It is the mental model:
+          where state lives, which machine does what, and why the system keeps
+          working when projects stop, browsers refresh, hosts move, or agents
+          run for a long time.
+        </p>
+      </section>
+
+      <section id="nouns" class="chapter">
+        <div class="chapter-number">01</div>
+        <div class="chapter-copy">
+          <h2>Start with three durable nouns</h2>
+          <p>
+            A <strong>bay</strong> is a control-plane cell. It runs Node.js
+            services, Conat services, workers, and its own Postgres database.
+            Accounts have a home bay. Projects have an owning bay. That gives
+            the system an explicit answer to the question: who is authoritative
+            for this action?
+          </p>
+          <p>
+            A <strong>project host</strong> is a compute/data-plane machine. It
+            runs project containers, direct project websocket services, file
+            services, SSH routing, app proxying, snapshots, backups, and host
+            maintenance.
+          </p>
+          <p>
+            A <strong>project</strong> is the durable unit of work: files,
+            notebooks, terminals, chat, history, snapshots, backups, RootFS
+            choice, and agent output.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Three nouns diagram">
+          <img
+            src="./assets/three-nouns.jpg"
+            alt="Diagram showing Bay, Project Host, and Project as the three durable nouns in CoCalc-AI"
+          />
+        </figure>
+      </section>
+
+      <section id="routing" class="chapter reverse">
+        <div class="chapter-number">02</div>
+        <div class="chapter-copy">
+          <h2>The browser uses the bay, then goes straight to the host</h2>
+          <p>
+            Account settings, project lists, membership, billing, placement, and
+            other control-plane operations go through the user's home bay or the
+            project's owning bay. Active project work goes to the project host.
+          </p>
+          <p>
+            In practice the browser obtains short-lived host-scoped credentials
+            from the bay, then opens direct project-host websocket connections.
+            The URL can still look simple, but the data path for notebooks,
+            terminals, files, chat, and agent tools is close to the project.
+          </p>
+          <p>
+            This is why CoCalc can keep project traffic low-latency without
+            trusting a project host to make global account decisions. Identity
+            comes from the control plane. Project access is enforced on the host
+            using local ACL state kept fresh from the bay.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Direct routing diagram">
+          <img
+            src="./assets/direct-traffic.jpg"
+            alt="Diagram showing browser control traffic to Home Bay and direct websocket traffic to Project Host"
+          />
+        </figure>
+      </section>
+
+      <section id="host" class="chapter">
+        <div class="chapter-number">03</div>
+        <div class="chapter-copy">
+          <h2>Inside a project host</h2>
+          <p>
+            Project hosts are intentionally not Kubernetes nodes. Today they are
+            managed Linux machines with systemd-supervised services. Projects
+            run in locked-down rootless Podman containers, which trades some
+            VM-style isolation for density, speed, and lower cost.
+          </p>
+          <p>
+            A host also runs the data-plane pieces around those containers:
+            Conat router and persist services, the file server, SSH routing via
+            <code>sshpiperd</code>, browser app proxying, and project lifecycle
+            control. Normal SSH is real SSH, including port forwarding and X11
+            forwarding, not a narrow web-shell imitation.
+          </p>
+          <p>
+            The host has its own durable local state for project placement,
+            service metadata, snapshots, and sync helpers, while the bay remains
+            authoritative for account and project ownership.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Project host cutaway">
+          <img
+            src="./assets/project-host-cutaway.jpg"
+            alt="Cutaway diagram of a CoCalc project host with rootless Podman, sshpiperd, proxy, Conat router, Conat persist, file server, SQLite, and systemd"
+          />
+        </figure>
+      </section>
+
+      <section id="sync" class="chapter reverse">
+        <div class="chapter-number">04</div>
+        <div class="chapter-copy">
+          <h2>Collaboration is not trapped inside the container</h2>
+          <p>
+            A project runtime can be off while document and file services still
+            work. That is a critical architectural distinction. The project is
+            not merely the running container; it is a durable directory plus
+            services that can read, write, sync, and serve project state.
+          </p>
+          <p>
+            Realtime document sync uses Patchflow, SyncDoc, and Conat streams.
+            The files that store sync and service state are ordinary SQLite
+            files in the project. That makes the state durable, inspectable, and
+            included in project-level backup and movement workflows.
+          </p>
+          <p>
+            The result is the behavior users notice: editors, chat, TimeTravel,
+            file access, and browser inspection can keep making sense even when
+            compute is stopped or restarted.
+          </p>
+        </div>
+        <figure
+          class="panel image-panel"
+          aria-label="Collaboration off project"
+        >
+          <img
+            src="./assets/off-container-sync.jpg"
+            alt="Diagram showing Patchflow, Sync Service, SQLite in project, files, chat, editors, and TimeTravel working while Project OFF"
+          />
+        </figure>
+      </section>
+
+      <section id="storage" class="chapter">
+        <div class="chapter-number">05</div>
+        <div class="chapter-copy">
+          <h2>R2 and Rustic are the long-term movement layer</h2>
+          <p>
+            Project hosts use local Btrfs for fast snapshots, clones, reflinks,
+            compression, and deduplication-friendly project storage. For durable
+            external storage, CoCalc uses Rustic repositories backed by
+            Cloudflare R2 buckets.
+          </p>
+          <p>
+            R2 is not just a backup bucket. It is part of how project state
+            moves between hosts and regions. The same storage layer is used for
+            project backups, Postgres backups, long-term RootFS artifacts, and
+            restore/copy workflows.
+          </p>
+          <p>
+            Rustic repositories are sharded. A repo may hold hundreds of
+            projects, while a deployment can have many repos spread across
+            buckets. That keeps backup storage operationally bounded without
+            requiring one enormous repository.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="R2 Rustic storage">
+          <img
+            src="./assets/r2-rustic.jpg"
+            alt="Diagram showing Cloudflare R2, Rustic, project backups, Postgres backups, RootFS storage, sharded repos, and movement between hosts and regions"
+          />
+        </figure>
+      </section>
+
+      <section id="scale" class="chapter reverse">
+        <div class="chapter-number">06</div>
+        <div class="chapter-copy">
+          <h2>
+            Launchpad and Rocket are the same architecture at different sizes
+          </h2>
+          <p>
+            Launchpad is the one-bay form of CoCalc. It is deliberately simple:
+            a small self-contained Node SEA binary, PGlite for the embedded
+            database, and the same project-host model used elsewhere.
+          </p>
+          <p>
+            Rocket is the scale-up form. PGlite becomes Postgres. One Node.js
+            bay process becomes many systemd-managed services. One bay becomes
+            many bays. The code is otherwise the same code path, not a separate
+            product with a different architecture.
+          </p>
+          <p>
+            The project hosts are already multiprocess and vertically scalable
+            in the Launchpad model. Rocket adds more control-plane capacity and
+            more bays, not a different idea of what a project is.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Launchpad to Rocket">
+          <img
+            src="./assets/launchpad-rocket.jpg"
+            alt="Diagram comparing Launchpad and Rocket, with same code, PGlite, Postgres, one Node.js process, many systemd services, one bay, many bays, and same project hosts"
+          />
+        </figure>
+      </section>
+
+      <section class="strip">
+        <h2>What this architecture is trying to buy</h2>
+        <div class="loop">
+          <div>
+            <span>1</span>
+            <strong>Clear Authority</strong>
+            <p>
+              Account, project, and host ownership are explicit, so actions can
+              route to the bay that is allowed to decide.
+            </p>
+          </div>
+          <div>
+            <span>2</span>
+            <strong>Direct Project Work</strong>
+            <p>
+              Heavy project traffic goes to the project host instead of through
+              a single central websocket bottleneck.
+            </p>
+          </div>
+          <div>
+            <span>3</span>
+            <strong>Durable State</strong>
+            <p>
+              Files, sync state, snapshots, backups, and RootFS artifacts have
+              concrete storage paths and recovery workflows.
+            </p>
+          </div>
+          <div>
+            <span>4</span>
+            <strong>Understandable Scale</strong>
+            <p>
+              Launchpad, hosted CoCalc, and Rocket are different deployment
+              sizes of one system, not unrelated rewrites.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter">
+        <div class="chapter-number">07</div>
+        <div class="chapter-copy">
+          <h2>What CoCalc is not</h2>
+          <p>
+            CoCalc is not Kubernetes-first. It can eventually have Kubernetes
+            deployment options, but the current release architecture uses
+            systemd-managed bays and systemd-managed project-host services.
+          </p>
+          <p>
+            CoCalc is also not a public app host as its central category. It can
+            proxy project apps, but the main object is a durable private project
+            environment for people, notebooks, terminals, files, and agents.
+          </p>
+          <p>
+            Finally, CoCalc is not a disposable command runner. The system is
+            built around work that accumulates state: code, logs, chat, outputs,
+            snapshots, backups, and recoverable environments.
+          </p>
+        </div>
+        <figure class="panel code-card" aria-label="Architecture notes">
+          <h3>Implementation notes</h3>
+          <ul>
+            <li>Bays use Postgres in Rocket and PGlite in Launchpad.</li>
+            <li>Project hosts run rootless Podman containers.</li>
+            <li>Project-host auth uses short-lived host-scoped tokens.</li>
+            <li>Patchflow powers collaborative document history and merge.</li>
+            <li>Rustic and R2 carry backups, RootFS state, and moves.</li>
+          </ul>
+        </figure>
+      </section>
+
+      <section id="sources" class="closing">
+        <p>
+          The CoCalc-AI source is available at
+          <a href="https://github.com/sagemathinc/cocalc-ai"
+            >github.com/sagemathinc/cocalc-ai</a
+          >. This guide is based on the repository architecture notes for
+          scalable bays, bay systemd deployment, project-host Conat services,
+          direct project-host authentication, the SSH proxy, Patchflow sync, the
+          project-host file server, RootFS, and backup code.
+          <a href="https://github.com/sagemathinc/patchflow">Patchflow</a> is
+          available separately.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
