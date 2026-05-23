@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The CoCalc Terminal</title>
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main>
+      <a class="site-home" href="../">CoCalc Guides</a>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">A CoCalc-AI field guide for terminal work</p>
+          <h1>The CoCalc Terminal</h1>
+          <p class="dek">
+            CoCalc uses the familiar xterm.js terminal core, then turns a shell
+            into something unusual: a durable, collaborative project document
+            that humans and agents can reopen, inspect, split, discuss, and
+            continue from the same place.
+          </p>
+        </div>
+        <figure class="hero-figure" aria-label="CoCalc collaborative terminal">
+          <img
+            src="./assets/hero-terminal.png"
+            alt="Illustrated CoCalc terminal with a shared work.term file, collaborators, Codex, project files, and side chat"
+          />
+        </figure>
+      </section>
+
+      <nav class="toc" aria-label="Guide sections">
+        <a href="#positioning">Where it fits</a>
+        <a href="#term-file">.term files</a>
+        <a href="#collaboration">Collaboration</a>
+        <a href="#agents">Agents</a>
+        <a href="#workflows">Workflows</a>
+        <a href="#architecture">Why it works</a>
+      </nav>
+
+      <section class="intro">
+        <p>
+          A normal terminal is local and private. A browser terminal is often
+          just a remote shell in a web page. CoCalc's terminal is closer to a
+          project artifact: it has a file name, a working directory, shared
+          history, backend state, realtime collaborators, and agent-accessible
+          tools.
+        </p>
+        <p>
+          That distinction matters when the terminal is part of research,
+          teaching, debugging, installation, GitHub work, or long-running
+          computation. The shell becomes part of the shared workspace instead of
+          an invisible side channel.
+        </p>
+      </section>
+
+      <section id="positioning" class="chapter">
+        <div class="chapter-number">01</div>
+        <div class="chapter-copy">
+          <h2>Use the terminal without leaving the project</h2>
+          <p>
+            CoCalc terminals feel familiar because they use the same terminal
+            engine people know from VS Code and many modern web shells. You get
+            selectable color schemes, clickable links, normal shell behavior,
+            package managers, SSH, scripts, compilers, Python, Git, and the rest
+            of a Linux project environment.
+          </p>
+          <p>
+            The difference is the surrounding workspace. You can put a terminal
+            next to a notebook, a LaTeX file, a markdown note, side chat, or a
+            Codex thread. The command line is not separated from the documents
+            it is helping to create.
+          </p>
+        </div>
+        <div class="panel comparison">
+          <h3>Think of it as three tools at once</h3>
+          <ul>
+            <li>A standard Linux terminal for commands and processes.</li>
+            <li>A collaborative document that collaborators can reopen.</li>
+            <li>A context source that Codex can inspect and act on.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="term-file" class="chapter reverse">
+        <div class="chapter-number">02</div>
+        <div class="chapter-copy">
+          <h2>A <code>.term</code> file gives the shell an address</h2>
+          <p>
+            In CoCalc, a terminal can be a file such as
+            <code>research/runs/run.term</code>. Opening that file starts the
+            shell in the containing directory, and reopening the same file gives
+            everyone a stable way to find the same terminal context later.
+          </p>
+          <p>
+            This is simple but important. A terminal anchored to a project path
+            is easy to share, easy to restore, easy to place next to related
+            files, and easy for an agent to identify precisely.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label=".term file anchor">
+          <img
+            src="./assets/term-file-anchor.png"
+            alt="Diagram showing research/runs/run.term anchoring a terminal working directory, history, reopen behavior, and agent tools"
+          />
+        </figure>
+      </section>
+
+      <section id="collaboration" class="chapter">
+        <div class="chapter-number">03</div>
+        <div class="chapter-copy">
+          <h2>One terminal stream, many viewers</h2>
+          <p>
+            Multiple browsers and collaborators can open the same terminal and
+            see the same live stream. The session continues when a browser tab
+            closes, and a collaborator can reconnect later without asking
+            someone to paste the missing output.
+          </p>
+          <p>
+            CoCalc also handles the awkward details of shared terminals:
+            resizing to a common view, pausing output when it scrolls too fast,
+            booting stale viewers when needed, and letting people discuss the
+            terminal in side chat.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Collaborative PTY stream">
+          <img
+            src="./assets/collaborative-pty.png"
+            alt="Diagram showing instructor, student, and Codex browser views connected to one PTY stream with durable reconnect, shared size, pause output, and side chat"
+          />
+        </figure>
+      </section>
+
+      <section id="agents" class="strip">
+        <h2>The agent loop is concrete, not magical</h2>
+        <div class="cards">
+          <div>
+            <span>1</span>
+            <strong>Read</strong>
+            <p>
+              Codex can inspect terminal sessions, including scrollback and
+              whether the session is still running.
+            </p>
+          </div>
+          <div>
+            <span>2</span>
+            <strong>Reason</strong>
+            <p>
+              The terminal output sits beside files, notebooks, Git state, and
+              chat history, so debugging has real context.
+            </p>
+          </div>
+          <div>
+            <span>3</span>
+            <strong>Write</strong>
+            <p>
+              With the CoCalc CLI, agents can send input to a live terminal when
+              that is the right tool.
+            </p>
+          </div>
+          <div>
+            <span>4</span>
+            <strong>Continue</strong>
+            <p>
+              Durable sessions mean the work survives refreshes and browser
+              disconnects.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="workflows" class="chapter reverse">
+        <div class="chapter-number">04</div>
+        <div class="chapter-copy">
+          <h2>Keep terminal work connected to the surrounding task</h2>
+          <p>
+            The <code>open</code> command turns terminal paths into project
+            tabs: <code>open notes.md</code> opens the file in the browser
+            workspace. Splits let you run a server, tail logs, edit a script,
+            and keep a Python REPL visible at the same time.
+          </p>
+          <p>
+            This makes the terminal a good fit for quick package installs, SSH,
+            GitHub CLI work, teaching support, build logs, data cleanup, and the
+            practical steps around notebooks and papers that are easier in a
+            shell than in a menu.
+          </p>
+        </div>
+        <div class="panel callout">
+          <h3>Good terminal jobs in CoCalc</h3>
+          <p>
+            Install system packages, run a one-off script, connect to another
+            machine, check a compiler error, manage a Git branch, inspect a
+            large file, or let Codex automate the boring part while you watch
+            the same session.
+          </p>
+        </div>
+      </section>
+
+      <section id="architecture" class="chapter">
+        <div class="chapter-number">05</div>
+        <div class="chapter-copy">
+          <h2>The backend does the durable work</h2>
+          <p>
+            The terminal session lives on the project backend, not in the
+            browser. CoCalc stores terminal history, tracks session state,
+            supports live inspection through
+            <code>cocalc project terminal</code>, and adapts buffering when a
+            command produces a large amount of output.
+          </p>
+          <p>
+            The goal is not to drop output to make the browser feel fast. The
+            goal is to keep the stream manageable, apply real terminal
+            backpressure, and preserve enough context that humans and agents can
+            understand what happened.
+          </p>
+        </div>
+        <div class="panel comparison">
+          <h3>A few commands an agent can use</h3>
+          <pre><code>cocalc project terminal list
+cocalc project terminal history research/runs/run.term
+cocalc project terminal cwd research/runs/run.term
+cocalc project terminal write research/runs/run.term 'make test\n'</code></pre>
+        </div>
+      </section>
+
+      <section class="closing">
+        <h2>The terminal becomes part of the record</h2>
+        <p>
+          CoCalc's terminal is still a shell. That is the point. But because it
+          is addressable, collaborative, durable, and agent-aware, it can carry
+          more of the real work of a project without becoming a private scratch
+          pad that disappears when the browser tab closes.
+        </p>
+        <div class="links">
+          <a href="../software-install/">Read the software install guide</a>
+          <a href="../agent-sandbox-cloud/">Read about project sandboxes</a>
+          <a href="../codex-agent-chat/">Read about Codex chat</a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
