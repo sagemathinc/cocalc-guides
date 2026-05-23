@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CoCalc for Agent Sandboxes</title>
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main>
+      <a class="site-home" href="../">CoCalc Guides</a>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">
+            A CoCalc-AI field guide for agent infrastructure
+          </p>
+          <h1>CoCalc for Agent Sandboxes</h1>
+          <p class="dek">
+            CoCalc-AI is not mainly a place to publish public apps. It is a
+            durable collaborative project cloud: fast Linux workspaces where
+            humans and agents can run code, keep files, use real SSH, take
+            snapshots, manage environments, and move work forward together.
+          </p>
+        </div>
+        <figure class="hero-figure" aria-label="Agent sandbox landscape map">
+          <img
+            src="./assets/hero-sandbox.jpg"
+            alt="Illustrated map of CoCalc as a durable collaborative project for humans and agents, near Fly Sprites, Warp Oz, Runpod, Railway, Codespaces, Vercel, Cloudflare, and Launchpad"
+          />
+        </figure>
+      </section>
+
+      <nav class="toc" aria-label="Guide sections">
+        <a href="#category">The category</a>
+        <a href="#map">The landscape</a>
+        <a href="#lifecycle">Project lifecycle</a>
+        <a href="#hosts">Hosts and cost</a>
+        <a href="#state">State and RootFS</a>
+        <a href="#collaboration">Humans and agents</a>
+        <a href="#trust">Trust model</a>
+        <a href="#sources">References</a>
+      </nav>
+
+      <section id="category" class="intro">
+        <p>
+          Coding agents changed what a "sandbox" needs to be. A useful agent
+          workspace is not just a one-shot command runner. It needs a real
+          filesystem, installed tools, durable output, cheap start/stop,
+          recovery points, a way for humans to inspect what happened, and a path
+          to run many environments without hand-administering every machine.
+        </p>
+        <p>
+          CoCalc's primitive is the project. A project can be stopped, started,
+          searched, opened in a browser, reached by SSH, snapshotted, backed up,
+          moved to another host, assigned a RootFS image, and shared with an
+          agent or another person. That is a different center of gravity from a
+          public app host, a raw GPU rental, or a disposable execution API.
+        </p>
+      </section>
+
+      <section id="map" class="chapter">
+        <div class="chapter-number">01</div>
+        <div class="chapter-copy">
+          <h2>Do not confuse project clouds with app hosting</h2>
+          <p>
+            Vercel, Railway, Fly apps, and Cloudflare Workers are excellent when
+            the goal is to deploy a public service. That is not CoCalc's main
+            job. CoCalc is where you develop, test, inspect, collaborate, and
+            let agents work inside private project environments. Public
+            deployment can happen elsewhere.
+          </p>
+          <p>
+            Runpod and GPU clouds are closer to raw compute. Codespaces is
+            closer to editor-first development environments. Fly's Sprites and
+            Warp Oz point toward a newer idea: agents need durable working
+            computers. CoCalc sits in that same conversation, but with a
+            collaborative project UI, real SSH, RootFS management, snapshots,
+            backups, and self-hosted deployment paths.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Sandbox positioning map">
+          <img
+            src="./assets/positioning-map.jpg"
+            alt="Positioning map of cloud sandboxes by ephemeral runner to durable project and raw compute to collaborative workspace"
+          />
+        </figure>
+      </section>
+
+      <section id="lifecycle" class="chapter reverse">
+        <div class="chapter-number">02</div>
+        <div class="chapter-copy">
+          <h2>A sandbox with a memory</h2>
+          <p>
+            A CoCalc project has a lifecycle. Create it from a RootFS image,
+            start it, run a command, open a browser workspace, SSH into it,
+            snapshot it, back it up, stop it, and still inspect its files while
+            the compute is off.
+          </p>
+          <pre><code>cocalc project create demo --rootfs-image ubuntu --start
+cocalc project exec --project demo --bash "pytest -q"
+cocalc project ssh --project demo
+cocalc project snapshot create -w demo
+cocalc project backup create -w demo</code></pre>
+          <p>
+            That matters for agents. An agent turn can leave a trail: files,
+            logs, commits, terminal output, chat messages, and recoverable
+            project state. The sandbox is not just a process that disappeared.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Project lifecycle">
+          <img
+            src="./assets/project-lifecycle.jpg"
+            alt="CoCalc project lifecycle diagram showing create, start, exec, SSH, snapshot, backup, move, stop, and file inspection while off"
+          />
+        </figure>
+      </section>
+
+      <section id="hosts" class="chapter">
+        <div class="chapter-number">03</div>
+        <div class="chapter-copy">
+          <h2>Run many projects on managed dedicated hosts</h2>
+          <p>
+            One strong CoCalc shape is a managed dedicated host. A customer can
+            have a VM dedicated to their work, run many project sandboxes on it,
+            and avoid becoming the system administrator of that VM. CoCalc
+            handles the host lifecycle and project placement.
+          </p>
+          <p>
+            This creates a useful economic middle ground: better isolation and
+            predictability than a shared public pool, but with pricing close to
+            standard cloud rates instead of per-sandbox mystery pricing.
+          </p>
+          <p>
+            Spot instances matter too. CoCalc can use cheap spot capacity, fall
+            back to regular instances when spot is unavailable, and later probe
+            for spot again. Egress guardrails are part of the same story: if a
+            project suddenly starts sending huge traffic, CoCalc can surface and
+            control that before the cloud bill becomes the first alert.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Managed dedicated hosts">
+          <img
+            src="./assets/managed-hosts.jpg"
+            alt="Diagram of managed dedicated hosts, spot fallback and recovery, and egress guardrails for CoCalc projects"
+          />
+        </figure>
+      </section>
+
+      <section id="state" class="chapter reverse">
+        <div class="chapter-number">04</div>
+        <div class="chapter-copy">
+          <h2>Treat environments as product state</h2>
+          <p>
+            Many sandbox products begin with a container image and stop there.
+            CoCalc has a broader environment model. RootFS images are selected
+            when projects are created. Users and admins can build reusable
+            environments for courses, teams, demos, or agent workloads.
+          </p>
+          <p>
+            Underneath, CoCalc leans on local filesystem machinery that is
+            valuable for this workload: fast Btrfs snapshots, project cloning,
+            reflink copies, compression, deduplication, and deduplicated
+            external backups with Rustic. The user-facing point is simple:
+            project state is fast to copy, cheap to preserve, and recoverable.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Environment state">
+          <img
+            src="./assets/environment-state.jpg"
+            alt="CoCalc environment state diagram with RootFS image, home files, Btrfs snapshots, dedupe, compression, Rustic backups, project clone, and reflink copy"
+          />
+        </figure>
+      </section>
+
+      <section id="collaboration" class="chapter">
+        <div class="chapter-number">05</div>
+        <div class="chapter-copy">
+          <h2>Let humans and agents share the same project</h2>
+          <p>
+            A browser-based project UI is not just a convenience layer. It is
+            how a person can inspect what the agent is doing: open files, watch
+            terminals, read chat, review commits, run notebooks, and share the
+            same state with another collaborator.
+          </p>
+          <p>
+            CoCalc also provides real SSH to projects through
+            <code>sshpiperd</code>. That means normal SSH workflows, including
+            port forwarding and X11 forwarding, fit beside the browser UI
+            instead of being replaced by a narrow web shell.
+          </p>
+          <p>
+            The intended pattern is often: build and test in CoCalc, then deploy
+            public services somewhere designed for public serving. That is the
+            same pattern these guides use: the work happens in CoCalc; the
+            published site lives on GitHub Pages.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Collaborative project">
+          <img
+            src="./assets/collaborative-project.jpg"
+            alt="Diagram of humans and agents sharing a CoCalc project with files, terminal, chat, agent turns, notebook, whiteboard, real SSH, and private-by-default workflow"
+          />
+        </figure>
+      </section>
+
+      <section id="trust" class="strip">
+        <h2>Know the trust model</h2>
+        <div class="loop">
+          <div>
+            <span>1</span>
+            <strong>Private Workspaces</strong>
+            <p>
+              CoCalc projects are for working environments first, not public app
+              deployment as the default story.
+            </p>
+          </div>
+          <div>
+            <span>2</span>
+            <strong>Rootless Containers</strong>
+            <p>
+              Projects run in locked-down rootless Podman containers, trading
+              microVM isolation for higher density and lower cost.
+            </p>
+          </div>
+          <div>
+            <span>3</span>
+            <strong>Recoverability</strong>
+            <p>
+              Snapshots, backups, clones, and file access while stopped make the
+              sandbox feel less disposable.
+            </p>
+          </div>
+          <div>
+            <span>4</span>
+            <strong>Self-Hostable</strong>
+            <p>
+              Launchpad packages the platform into one small SEA binary with
+              embedded PGlite; Rocket is the scale-up path.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter reverse">
+        <div class="chapter-number">06</div>
+        <div class="chapter-copy">
+          <h2>Who should care?</h2>
+          <p>
+            CoCalc's sandbox-cloud story is interesting for teams that run many
+            agent experiments, companies that want durable developer workspaces,
+            research groups with long computations, educators teaching Linux or
+            programming, and operators who want their own agent workspace cloud
+            without building the platform from scratch.
+          </p>
+          <p>
+            Hosted CoCalc gives the managed version. CoCalc Plus gives one user
+            a local or SSH-backed workspace. Launchpad gives a small group its
+            own self-hosted site with an unusually simple installation. Rocket
+            is the enterprise-scale version of the same idea.
+          </p>
+        </div>
+        <figure class="panel code-card" aria-label="Good fits">
+          <h3>Good fits</h3>
+          <ul>
+            <li>Agent coding runs that need real files and recovery points.</li>
+            <li>
+              Teams that want many durable Linux sandboxes on managed hosts.
+            </li>
+            <li>
+              Courses and workshops where everyone needs the same environment.
+            </li>
+            <li>
+              Private clouds that need collaboration without public app hosting.
+            </li>
+          </ul>
+        </figure>
+      </section>
+
+      <section id="sources" class="closing">
+        <p>
+          Product names here are used descriptively. The goal is orientation,
+          not ranking. For current details, read the public pages for
+          <a href="https://fly.io/blog/code-and-let-live/">Fly Sprites</a>,
+          <a href="https://www.warp.dev/oz">Warp Oz</a>,
+          <a href="https://www.runpod.io/">Runpod</a>,
+          <a href="https://railway.com/">Railway</a>,
+          <a href="https://github.com/features/codespaces">GitHub Codespaces</a
+          >, <a href="https://vercel.com/">Vercel</a>, and
+          <a
+            href="https://www.cloudflare.com/developer-platform/products/workers/"
+            >Cloudflare Workers</a
+          >. CoCalc-specific details come from the
+          <a href="https://github.com/sagemathinc/cocalc-ai">CoCalc-AI source</a
+          >, including the project CLI, file server, SSH proxy, RootFS, backup,
+          and host-management code.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

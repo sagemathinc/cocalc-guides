@@ -40,3 +40,6 @@ manuals. Each guide should be readable as a small standalone publication.
 - [CoCalc for LaTeX Users](./cocalc-for-latex/) - a comparison guide for
   understanding CoCalc alongside Overleaf, local TeX editors, VS Code, LyX,
   Tectonic, Typst, and other LaTeX workflows.
+- [CoCalc for Agent Sandboxes](./agent-sandbox-cloud/) - a positioning guide
+  for CoCalc as a durable collaborative Linux project cloud for agents and
+  humans, distinct from public app hosting.
