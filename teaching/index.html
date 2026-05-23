@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Teaching with CoCalc-AI</title>
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main>
+      <a class="site-home" href="../">CoCalc Guides</a>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">A CoCalc-AI field guide for instructors</p>
+          <h1>Teaching with CoCalc-AI</h1>
+          <p class="dek">
+            CoCalc is not just a place to post assignments. It is a live
+            computational classroom: every student has a project, instructors
+            can see and help in real time, assignments move without uploads,
+            notebooks can be autograded, and the software environment can be
+            identical for the whole course.
+          </p>
+        </div>
+        <figure class="hero-figure" aria-label="CoCalc teaching dashboard">
+          <img
+            src="./assets/hero-teaching.png"
+            alt="Illustrated CoCalc teaching dashboard connected to live student projects with assignments, chat, TimeTravel, nbgrader, and shared environments"
+          />
+        </figure>
+      </section>
+
+      <nav class="toc" aria-label="Guide sections">
+        <a href="#positioning">Where CoCalc fits</a>
+        <a href="#projects">Student projects</a>
+        <a href="#workflow">Assign and collect</a>
+        <a href="#realtime">Realtime teaching</a>
+        <a href="#grading">Grading</a>
+        <a href="#environments">Environments</a>
+        <a href="#models">Payment models</a>
+      </nav>
+
+      <section class="intro">
+        <p>
+          Most learning management systems are excellent at rosters, calendars,
+          announcements, gradebooks, files, and institution-wide communication.
+          CoCalc overlaps with some of that, but the center of gravity is
+          different.
+        </p>
+        <p>
+          CoCalc is strongest when the course work itself happens in a live
+          technical environment: notebooks, terminals, LaTeX, code, data, plots,
+          side chat, history, and sometimes agents. The course manager is the
+          control surface for that environment.
+        </p>
+      </section>
+
+      <section id="positioning" class="chapter">
+        <div class="chapter-number">01</div>
+        <div class="chapter-copy">
+          <h2>Use the right tool for the right teaching job</h2>
+          <p>
+            Canvas, Moodle, Blackboard, and similar systems are natural homes
+            for institution-wide administration. JupyterHub-style systems are
+            natural homes for notebook execution. CoCalc sits in the overlap,
+            then adds one important thing: the instructor can work inside the
+            same live project environment as the student.
+          </p>
+          <p>
+            That makes CoCalc a strong fit for computational math, data science,
+            programming, scientific computing, research workshops, technical
+            writing, and any course where the real learning happens while
+            students manipulate files and run code.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Teaching landscape">
+          <img
+            src="./assets/teaching-landscape.png"
+            alt="Positioning diagram comparing LMS tools, notebook hubs, and CoCalc for teaching"
+          />
+        </figure>
+      </section>
+
+      <section id="projects" class="chapter reverse">
+        <div class="chapter-number">02</div>
+        <div class="chapter-copy">
+          <h2>Give every student a real project</h2>
+          <p>
+            In a CoCalc course, students do their work in separate projects.
+            That isolation matters: each student has their own files, notebooks,
+            terminals, packages, outputs, and history. Group projects are also
+            possible when collaboration is the point.
+          </p>
+          <p>
+            The instructor project contains the course file, assignments,
+            handouts, configuration, shared materials, and the roster. Other
+            instructors and TAs can collaborate on that course interface because
+            the course file itself is a collaborative CoCalc document.
+          </p>
+        </div>
+        <div class="panel callout">
+          <h3>The course file is not just an admin screen</h3>
+          <p>
+            It is a collaborative document that drives the course workflow:
+            students, assignments, handouts, grading state, project
+            configuration, and activity. That is why multiple instructors can
+            coordinate inside the same live course manager.
+          </p>
+        </div>
+      </section>
+
+      <section id="workflow" class="chapter">
+        <div class="chapter-number">03</div>
+        <div class="chapter-copy">
+          <h2>Assign, collect, grade, return</h2>
+          <p>
+            CoCalc changes the assignment ritual. Students do not package up
+            files and submit them through a separate upload form. The instructor
+            assigns a folder to student projects, students work there, and the
+            instructor collects the work back into the course project.
+          </p>
+          <p>
+            That makes the workflow less ceremonial and more operational. You
+            can distribute a notebook, collect it, inspect it, autograde it,
+            return feedback, then repeat.
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Assign collect loop">
+          <img
+            src="./assets/assign-collect-loop.png"
+            alt="Illustrated CoCalc teaching loop: instructor project, assign, student projects, collect, grade, return, TimeTravel"
+          />
+        </figure>
+      </section>
+
+      <section id="realtime" class="chapter reverse">
+        <div class="chapter-number">04</div>
+        <div class="chapter-copy">
+          <h2>Teach while students are actually working</h2>
+          <p>
+            The unusual part of CoCalc teaching is realtime visibility. An
+            instructor or TA can open a student's project, see the current file,
+            watch edits, inspect output, and answer in a side chat at the moment
+            help is needed.
+          </p>
+          <p>
+            This is useful in labs, office hours, workshops, and remote
+            teaching. The point is not surveillance. The point is reducing the
+            gap between "I am stuck" and "someone can see the exact state I am
+            stuck in."
+          </p>
+        </div>
+        <figure class="panel image-panel" aria-label="Live teaching lab">
+          <img
+            src="./assets/live-lab.png"
+            alt="Instructor viewing live student projects with side chat, notebooks, TimeTravel, and nbgrader checks"
+          />
+        </figure>
+      </section>
+
+      <section id="grading" class="strip">
+        <h2>Grade in the same environment students used</h2>
+        <div class="cards">
+          <div>
+            <span>1</span>
+            <strong>Manual review</strong>
+            <p>
+              Open collected work, leave comments, edit feedback, and return
+              graded files from the course manager.
+            </p>
+          </div>
+          <div>
+            <span>2</span>
+            <strong>nbgrader</strong>
+            <p>
+              Autograde Jupyter notebook assignments, including configurable
+              timeouts, output limits, hidden-test policy, and a dedicated
+              grading project when useful.
+            </p>
+          </div>
+          <div>
+            <span>3</span>
+            <strong>Peer grading</strong>
+            <p>
+              Optionally redistribute collected work so students grade each
+              other using instructor-provided markdown guidelines.
+            </p>
+          </div>
+          <div>
+            <span>4</span>
+            <strong>TimeTravel</strong>
+            <p>
+              Rewind a student's work, understand how they got there, recover
+              accidental damage, and see engagement over time.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="environments" class="chapter">
+        <div class="chapter-number">05</div>
+        <div class="chapter-copy">
+          <h2>Make the software stack part of the course</h2>
+          <p>
+            A computational course often fails on setup before it fails on
+            mathematics or programming. CoCalc lets a course define the project
+            environment students use. With managed RootFS images, a course can
+            start every student in the same software stack, with the same tools
+            and data available.
+          </p>
+          <p>
+            That is especially valuable for workshops, lab courses, specialized
+            research software, and classes where "works on my laptop" should not
+            be a weekly topic.
+          </p>
+        </div>
+        <div class="panel callout">
+          <h3>A safe place to learn by trying</h3>
+          <p>
+            TimeTravel, instructor-controlled snapshots, and backups make the
+            environment less brittle. Students can experiment, break things, and
+            recover. Instructors can preserve evidence when needed and restore
+            course work without depending on a student's local machine.
+          </p>
+        </div>
+      </section>
+
+      <section id="models" class="chapter reverse">
+        <div class="chapter-number">06</div>
+        <div class="chapter-copy">
+          <h2>Fit the institution, the class, or the workshop</h2>
+          <p>
+            CoCalc supports several course funding patterns: institute-paid
+            seats, student-paid course memberships, and site-license coverage.
+            That flexibility matters because a semester course, a one-day
+            workshop, and a research group training program often have different
+            constraints.
+          </p>
+          <p>
+            The product shape is the same in each case: students work in
+            projects, instructors manage the course, and the technical work
+            happens in a collaborative compute environment.
+          </p>
+        </div>
+        <div class="panel comparison">
+          <h3>When CoCalc is the teaching center</h3>
+          <ul>
+            <li>Students need notebooks, terminals, files, or LaTeX.</li>
+            <li>Instructors want live visibility into student work.</li>
+            <li>Assignments should move without upload/submission friction.</li>
+            <li>The class needs a reproducible software environment.</li>
+            <li>History, recovery, and academic-integrity evidence matter.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="closing">
+        <h2>CoCalc is a live computational classroom</h2>
+        <p>
+          The short version: use your LMS for the institution-facing course
+          shell if that is what your school expects. Use CoCalc when the course
+          work itself needs to be live, computational, collaborative,
+          reproducible, inspectable, and recoverable.
+        </p>
+        <div class="links">
+          <a href="https://doc.cocalc.com/teaching-instructors.html"
+            >Instructor manual</a
+          >
+          <a href="../jupyter-notebooks/">Jupyter guide</a>
+          <a href="../rootfs-management/">RootFS guide</a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
